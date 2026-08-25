@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OmniFrame v1.2 - All-in-One CSS
+   OmniFrame v1.3 - All-in-One CSS
    Importe este único arquivo no seu HTML se quiser acessar todo o framework
    sem precisar declarar cada componente separadamente.
    ========================================================================== */
@@ -30,6 +30,11 @@
 @import url('./components/sidebar.css');
 @import url('./components/smartselect.css');
 @import url('./components/tabs.css');
+
+/* 4. Componentes Interativos / App-Like (v1.3) */
+@import url('./components/dragdrop.css');
+@import url('./components/kanban.css');
+@import url('./components/calendar.css');
 
 /* Nota: O login.css foi omitido de propósito, pois é voltado apenas para 
    telas de autenticação isoladas e não para a estrutura de um Dashboard. */

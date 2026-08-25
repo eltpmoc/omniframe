@@ -288,6 +288,55 @@ export class Modal {
             modal.open();
         });
     }
+
+    static prompt(message, title = 'Entrada de Dados', defaultValue = '') {
+        return new Promise((resolve) => {
+            const inputId = 'of-modal-prompt-input-' + Math.random().toString(36).substr(2, 9);
+            const contentHTML = `
+                <div class="of-form-group">
+                    <label class="of-label" for="${inputId}">${message}</label>
+                    <input type="text" id="${inputId}" class="of-input" value="${defaultValue}" autocomplete="off">
+                </div>
+            `;
+
+            const modal = new Modal({
+                title: title,
+                content: contentHTML,
+                size: 'sm',
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        class: 'of-btn-secondary',
+                        onClick: (e, instance) => {
+                            instance.close();
+                            resolve(null);
+                        }
+                    },
+                    {
+                        text: 'Confirmar',
+                        class: 'of-btn-primary',
+                        onClick: (e, instance) => {
+                            const inputEl = instance.modalElement.querySelector(`#${inputId}`);
+                            const value = inputEl ? inputEl.value : null;
+                            instance.close();
+                            resolve(value);
+                        }
+                    }
+                ]
+            });
+            
+            modal.open();
+            
+            // Focar o input automaticamente assim que abrir
+            setTimeout(() => {
+                const inputEl = modal.modalElement.querySelector(`#${inputId}`);
+                if (inputEl) {
+                    inputEl.focus();
+                    inputEl.select();
+                }
+            }, 50);
+        });
+    }
 }
 
 // Auto-init for data-attributes

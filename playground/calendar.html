@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Dinâmico - OmniFrame v1.3</title>
+    
+    <!-- Importação All-in-One base -->
+    <link rel="stylesheet" href="../src/css/omniframe.css">
+    
+    <!-- Estilos específicos da v1.3 sendo construídos -->
+    <link rel="stylesheet" href="../src/css/components/calendar.css">
+
+    <style>
+        body { padding: 2rem; background-color: var(--of-bg-body); }
+        .page-header { margin-bottom: 2rem; }
+        .calendar-wrapper { max-width: 900px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+    <div class="calendar-wrapper">
+        <div class="page-header">
+            <h1>Calendário de Eventos</h1>
+            <p class="of-text-muted">Motor matemático independente de datas com agendamento de tarefas. Clique em qualquer dia para adicionar um evento!</p>
+        </div>
+
+        <!-- Container alvo para o Componente de Calendário -->
+        <div id="meuCalendario"></div>
+    </div>
+
+    <!-- Scripts da v1.3 -->
+    <script type="module">
+        import { Calendar } from '../src/js/components/Calendar.js';
+        
+        // Inicializa o calendário apontando para a Div alvo
+        const meuCal = new Calendar('#meuCalendario');
+        
+        // Apenas para demonstração, vamos simular que já temos 1 evento no BD para o dia de hoje
+        const hoje = new Date();
+        const strHoje = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, '0')}-${String(hoje.getDate()).padStart(2, '0')}`;
+        
+        meuCal.events[strHoje] = [
+            { id: 1, title: "Lançamento OmniFrame", time: "18:00", color: "#ec4899" }
+        ];
+        
+        // Re-renderiza para mostrar esse dado estático
+        meuCal.renderDays();
+    </script>
+</body>
+</html>

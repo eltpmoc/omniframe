@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Kanban Board (Trello-like) & Post-its
+   Requer: dragdrop.css
+   ========================================================================== */
+
+.of-kanban-board {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    min-height: 70vh;
+    align-items: flex-start;
+}
+
+/* 
+   Colunas do Kanban
+*/
+.of-kanban-column {
+    background-color: var(--of-bg-secondary);
+    border-radius: var(--of-radius-lg);
+    width: 320px;
+    min-width: 320px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid var(--of-border-color);
+}
+
+.of-kanban-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.of-kanban-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--of-text-color);
+}
+
+.of-kanban-badge {
+    background-color: var(--of-border-color);
+    color: var(--of-text-muted);
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--of-radius-full);
+    font-weight: 600;
+}
+
+.of-kanban-body {
+    flex: 1;
+    overflow-y: auto;
+    /* Essa é a área de Dropzone! */
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* 
+   Cartões / Post-its
+*/
+.of-post-it {
+    background-color: var(--of-bg-body);
+    border-radius: var(--of-radius-md);
+    padding: 1rem;
+    box-shadow: var(--of-shadow-sm);
+    border: 1px solid var(--of-border-color);
+    border-left: 4px solid var(--of-primary); /* Faixa de cor por padrão */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.of-post-it:hover {
+    box-shadow: var(--of-shadow-md);
+}
+
+.of-post-it-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.of-post-it-desc {
+    font-size: 0.85rem;
+    color: var(--of-text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.of-post-it-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity var(--of-transition-fast);
+}
+
+.of-post-it:hover .of-post-it-actions {
+    opacity: 1;
+}
+
+.of-post-it-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--of-text-muted);
+    padding: 0.25rem;
+    border-radius: var(--of-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.of-post-it-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--of-text-color);
+}
+
+/* 
+   Color Palette for Modal Editing
+*/
+.of-color-palette {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.of-color-radio {
+    display: none; /* Hide native radio */
+}
+
+.of-color-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid var(--of-border-color);
+    transition: transform var(--of-transition-fast), border-color var(--of-transition-fast);
+    display: inline-block;
+}
+
+.of-color-swatch.swatch-default { background-color: var(--of-bg-body); }
+.of-color-swatch.swatch-yellow { background-color: #fef08a; border-color: #fde047; }
+.of-color-swatch.swatch-blue { background-color: #bfdbfe; border-color: #93c5fd; }
+.of-color-swatch.swatch-pink { background-color: #fbcfe8; border-color: #f9a8d4; }
+
+.of-color-radio:checked + .of-color-swatch {
+    transform: scale(1.2);
+    border-color: var(--of-primary);
+    box-shadow: 0 0 0 2px var(--of-bg-body), 0 0 0 4px var(--of-primary);
+}
+
+/* 
+   Cores Famosas de Post-its 
+*/
+.of-post-it.is-yellow {
+    background-color: #fef08a; /* Amarelo pastel */
+    border-color: #fde047;
+    border-left-color: #eab308;
+    color: #422006;
+}
+.of-post-it.is-yellow .of-post-it-desc {
+    color: #713f12;
+}
+
+.of-post-it.is-blue {
+    background-color: #bfdbfe;
+    border-color: #93c5fd;
+    border-left-color: #3b82f6;
+    color: #172554;
+}
+.of-post-it.is-blue .of-post-it-desc {
+    color: #1e3a8a;
+}
+
+.of-post-it.is-pink {
+    background-color: #fbcfe8;
+    border-color: #f9a8d4;
+    border-left-color: #ec4899;
+    color: #500724;
+}
+.of-post-it.is-pink .of-post-it-desc {
+    color: #831843;
+}

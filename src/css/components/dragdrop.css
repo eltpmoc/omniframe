@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Drag and Drop Utilities (Foundation for Kanban and Sortable Lists)
+   ========================================================================== */
+
+/* 
+   Área que aceita receber um item (Dropzone)
+*/
+.of-dropzone {
+    min-height: 50px;
+    transition: background-color var(--of-transition-fast), outline var(--of-transition-fast);
+}
+
+/* Quando um item está sendo arrastado SOBRE a dropzone (feedback visual) */
+.of-dropzone.is-dragover {
+    background-color: rgba(79, 70, 229, 0.05); /* Cor primária bem suave */
+    outline: 2px dashed var(--of-primary);
+    outline-offset: -2px;
+    border-radius: var(--of-radius-md);
+}
+
+/* 
+   Item que pode ser arrastado
+*/
+.of-draggable {
+    cursor: grab;
+    touch-action: none; /* Previne scroll no mobile durante o drag */
+    user-select: none;
+    transition: box-shadow var(--of-transition-fast), transform var(--of-transition-fast), opacity var(--of-transition-fast);
+}
+
+/* Quando o usuário está segurando/arrastando */
+.of-draggable:active {
+    cursor: grabbing;
+}
+
+/* 
+   O item "Fantasma" que fica no local original na DOM 
+   (O HTML5 Drag and Drop esconde o elemento original parcialmente, nós estilizamos essa sombra)
+*/
+.of-draggable.is-dragging {
+    opacity: 0.4;
+    transform: scale(0.98); /* Fica ligeiramente menor */
+    box-shadow: none;
+}
+
+/* 
+   Drop Indicator (Linha que indica onde o item vai cair entre outros itens)
+*/
+.of-drop-indicator {
+    height: 4px;
+    background-color: var(--of-primary);
+    border-radius: 4px;
+    margin: 4px 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.of-drop-indicator.is-active {
+    opacity: 1;
+}

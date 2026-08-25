@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board & Post-its - OmniFrame v1.3</title>
+    
+    <!-- Importação All-in-One base -->
+    <link rel="stylesheet" href="../src/css/omniframe.css">
+    
+    <!-- Estilos específicos da v1.3 sendo construídos -->
+    <link rel="stylesheet" href="../src/css/components/dragdrop.css">
+    <link rel="stylesheet" href="../src/css/components/kanban.css">
+
+    <style>
+        body { padding: 2rem; background-color: var(--of-bg-body); }
+        .page-header { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>Fluxo de Trabalho (Kanban)</h1>
+        <p class="of-text-muted">Arraste os post-its entre as colunas. 100% Vanilla JS Drag & Drop.</p>
+    </div>
+
+    <div class="of-kanban-board">
+        
+        <!-- Coluna 1: A Fazer -->
+        <div class="of-kanban-column">
+            <div class="of-kanban-header">
+                <h3 class="of-kanban-title">A Fazer</h3>
+                <span class="of-kanban-badge">0</span>
+            </div>
+            
+            <button class="of-btn of-btn-ghost of-btn-sm" id="btnAddPostit" style="width: 100%; margin-bottom: 0.5rem; justify-content: flex-start;">
+                + Adicionar Cartão
+            </button>
+            
+            <!-- Esta é a área mágica de soltura -->
+            <div class="of-kanban-body" data-dropzone="true">
+                
+                <div class="of-post-it of-draggable is-yellow" data-draggable="true">
+                    <div class="of-post-it-actions">
+                        <button class="of-post-it-btn" aria-label="Editar" data-action="edit">✎</button>
+                        <button class="of-post-it-btn" aria-label="Excluir" data-action="delete">✕</button>
+                    </div>
+                    <h4 class="of-post-it-title">Reunião de Alinhamento</h4>
+                    <p class="of-post-it-desc">Discutir os novos recursos do OmniFrame v1.3 com a equipe de engenharia.</p>
+                </div>
+                
+                <div class="of-post-it of-draggable" data-draggable="true">
+                    <div class="of-post-it-actions">
+                        <button class="of-post-it-btn" aria-label="Editar" data-action="edit">✎</button>
+                        <button class="of-post-it-btn" aria-label="Excluir" data-action="delete">✕</button>
+                    </div>
+                    <h4 class="of-post-it-title">Atualizar Documentação</h4>
+                    <p class="of-post-it-desc">Criar os novos markdowns para os componentes de calendário e kanban.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Coluna 2: Fazendo -->
+        <div class="of-kanban-column">
+            <div class="of-kanban-header">
+                <h3 class="of-kanban-title">Em Andamento</h3>
+                <span class="of-kanban-badge">0</span>
+            </div>
+            <div class="of-kanban-body" data-dropzone="true">
+                
+                <div class="of-post-it of-draggable is-blue" data-draggable="true">
+                    <div class="of-post-it-actions">
+                        <button class="of-post-it-btn" aria-label="Editar" data-action="edit">✎</button>
+                        <button class="of-post-it-btn" aria-label="Excluir" data-action="delete">✕</button>
+                    </div>
+                    <h4 class="of-post-it-title">Motor de Drag & Drop</h4>
+                    <p class="of-post-it-desc">Escrever a lógica de dataTransfer do HTML5 sem usar bibliotecas gigantes.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Coluna 3: Concluído -->
+        <div class="of-kanban-column">
+            <div class="of-kanban-header">
+                <h3 class="of-kanban-title">Concluído</h3>
+                <span class="of-kanban-badge">0</span>
+            </div>
+            <div class="of-kanban-body" data-dropzone="true">
+                
+                <div class="of-post-it of-draggable is-pink" data-draggable="true">
+                    <div class="of-post-it-actions">
+                        <button class="of-post-it-btn" aria-label="Editar" data-action="edit">✎</button>
+                        <button class="of-post-it-btn" aria-label="Excluir" data-action="delete">✕</button>
+                    </div>
+                    <h4 class="of-post-it-title">Lançamento v1.2</h4>
+                    <p class="of-post-it-desc">Publicar no GitHub Pages com sucesso através do Github Actions.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts da v1.3 -->
+    <script type="module">
+        import { Kanban } from '../src/js/components/Kanban.js';
+        import { DragDrop } from '../src/js/components/DragDrop.js';
+        import { Modal } from '../src/js/components/Modal.js';
+        
+        // Kanban.js inicializa e chama o DragDrop.js automaticamente na carga inicial da página
+        const kanbanController = new Kanban();
+
+        // Lógica de adicionar cartões dinamicamente
+        document.getElementById('btnAddPostit').addEventListener('click', () => {
+            const addModal = new Modal({
+                title: 'Novo Cartão',
+                size: 'sm',
+                content: `
+                    <div class="of-form-group">
+                        <label class="of-label">Cor do Cartão</label>
+                        <div class="of-color-palette">
+                            <label>
+                                <input type="radio" name="addColor" value="" class="of-color-radio" checked>
+                                <span class="of-color-swatch swatch-default" title="Padrão"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="addColor" value="is-yellow" class="of-color-radio">
+                                <span class="of-color-swatch swatch-yellow" title="Amarelo"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="addColor" value="is-blue" class="of-color-radio">
+                                <span class="of-color-swatch swatch-blue" title="Azul"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="addColor" value="is-pink" class="of-color-radio">
+                                <span class="of-color-swatch swatch-pink" title="Rosa"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="of-form-group">
+                        <label class="of-label" for="addTitle">Título da Tarefa</label>
+                        <input type="text" id="addTitle" class="of-input" placeholder="Ex: Fazer deploy..." autocomplete="off">
+                    </div>
+                    <div class="of-form-group">
+                        <label class="of-label" for="addDesc">Descrição</label>
+                        <textarea id="addDesc" class="of-textarea" rows="3" placeholder="Detalhes da tarefa..."></textarea>
+                    </div>
+                `,
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        class: 'of-btn-secondary',
+                        onClick: (e, instance) => instance.close()
+                    },
+                    {
+                        text: 'Adicionar',
+                        class: 'of-btn-primary',
+                        onClick: (e, instance) => {
+                            const titulo = instance.modalElement.querySelector('#addTitle').value;
+                            const descricao = instance.modalElement.querySelector('#addDesc').value;
+                            const cor = instance.modalElement.querySelector('input[name="addColor"]:checked').value;
+                            
+                            if (!titulo || titulo.trim() === '') {
+                                return;
+                            }
+
+                            const novoCartao = document.createElement('div');
+                            novoCartao.className = `of-post-it of-draggable ${cor}`;
+                            novoCartao.setAttribute('data-draggable', 'true');
+                            novoCartao.innerHTML = `
+                                <div class="of-post-it-actions">
+                                    <button class="of-post-it-btn" aria-label="Editar" data-action="edit">✎</button>
+                                    <button class="of-post-it-btn" aria-label="Excluir" data-action="delete">✕</button>
+                                </div>
+                                <h4 class="of-post-it-title">${titulo}</h4>
+                                <p class="of-post-it-desc">${descricao}</p>
+                            `;
+
+                            // Adiciona na primeira coluna
+                            const colunaAFazer = document.querySelector('.of-kanban-column:first-child .of-kanban-body');
+                            colunaAFazer.appendChild(novoCartao);
+
+                            // Atualiza Motor de Drag e Badges
+                            DragDrop.autoInit();
+                            kanbanController.updateBadges(document.querySelector('.of-kanban-board'));
+                            
+                            instance.close();
+                        }
+                    }
+                ]
+            });
+            
+            addModal.open();
+            
+            // Foca no input após abrir
+            setTimeout(() => {
+                const input = document.getElementById('addTitle');
+                if (input) input.focus();
+            }, 50);
+        });
+
+        // Delegação de Eventos para os botões de Ação (Editar e Excluir)
+        document.querySelector('.of-kanban-board').addEventListener('click', async (e) => {
+            const btn = e.target.closest('.of-post-it-btn');
+            if (!btn) return;
+
+            const postIt = btn.closest('.of-post-it');
+            const action = btn.dataset.action;
+
+            if (action === 'delete') {
+                const confirmar = await Modal.confirm('Tem certeza que deseja excluir esta tarefa?', 'Atenção');
+                if (confirmar) {
+                    postIt.remove();
+                    kanbanController.updateBadges(document.querySelector('.of-kanban-board'));
+                }
+            } 
+            else if (action === 'edit') {
+                const titleEl = postIt.querySelector('.of-post-it-title');
+                const descEl = postIt.querySelector('.of-post-it-desc');
+                
+                // Determina a cor atual do post-it para deixar pré-selecionada
+                let currentColor = '';
+                if (postIt.classList.contains('is-yellow')) currentColor = 'is-yellow';
+                else if (postIt.classList.contains('is-blue')) currentColor = 'is-blue';
+                else if (postIt.classList.contains('is-pink')) currentColor = 'is-pink';
+                
+                // Criação de um Modal customizado sob demanda para edição complexa
+                const editModal = new Modal({
+                    title: 'Editar Tarefa',
+                    size: 'sm',
+                    content: `
+                    <div class="of-form-group">
+                        <label class="of-label">Cor do Cartão</label>
+                        <div class="of-color-palette">
+                            <label>
+                                <input type="radio" name="editColor" value="" class="of-color-radio" ${currentColor === '' ? 'checked' : ''}>
+                                <span class="of-color-swatch swatch-default" title="Padrão"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="editColor" value="is-yellow" class="of-color-radio" ${currentColor === 'is-yellow' ? 'checked' : ''}>
+                                <span class="of-color-swatch swatch-yellow" title="Amarelo"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="editColor" value="is-blue" class="of-color-radio" ${currentColor === 'is-blue' ? 'checked' : ''}>
+                                <span class="of-color-swatch swatch-blue" title="Azul"></span>
+                            </label>
+                            <label>
+                                <input type="radio" name="editColor" value="is-pink" class="of-color-radio" ${currentColor === 'is-pink' ? 'checked' : ''}>
+                                <span class="of-color-swatch swatch-pink" title="Rosa"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="of-form-group">
+                        <label class="of-label" for="editTitle">Título</label>
+                        <input type="text" id="editTitle" class="of-input" value="${titleEl.textContent}">
+                    </div>
+                    <div class="of-form-group">
+                        <label class="of-label" for="editDesc">Descrição</label>
+                        <textarea id="editDesc" class="of-textarea" rows="4">${descEl.textContent}</textarea>
+                    </div>
+                    `,
+                    buttons: [
+                        {
+                            text: 'Cancelar',
+                            class: 'of-btn-secondary',
+                            onClick: (e, instance) => instance.close()
+                        },
+                        {
+                            text: 'Salvar',
+                            class: 'of-btn-primary',
+                            onClick: (e, instance) => {
+                                const newTitle = instance.modalElement.querySelector('#editTitle').value;
+                                const newDesc = instance.modalElement.querySelector('#editDesc').value;
+                                const newColor = instance.modalElement.querySelector('input[name="editColor"]:checked').value;
+                                
+                                if (newTitle.trim() !== '') {
+                                    titleEl.textContent = newTitle;
+                                    descEl.textContent = newDesc;
+                                    
+                                    // Remove as cores antigas e aplica a nova
+                                    postIt.classList.remove('is-yellow', 'is-blue', 'is-pink');
+                                    if (newColor !== '') {
+                                        postIt.classList.add(newColor);
+                                    }
+
+                                    instance.close();
+                                }
+                            }
+                        }
+                    ]
+                });
+                
+                editModal.open();
+            }
+        });
+    </script>
+</body>
+</html>

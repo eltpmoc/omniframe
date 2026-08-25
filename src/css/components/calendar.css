@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Dynamic Calendar - OmniFrame v1.3
+   ========================================================================== */
+
+.of-calendar {
+    background-color: var(--of-bg-body);
+    border: 1px solid var(--of-border-color);
+    border-radius: var(--of-radius-lg);
+    box-shadow: var(--of-shadow-sm);
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Header (Navegação de Meses) */
+.of-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--of-border-color);
+    background-color: var(--of-bg-secondary);
+}
+
+.of-calendar-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--of-text-color);
+    text-transform: capitalize;
+}
+
+.of-calendar-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.of-calendar-btn {
+    background: transparent;
+    border: 1px solid var(--of-border-color);
+    color: var(--of-text-color);
+    border-radius: var(--of-radius-md);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--of-transition-fast);
+}
+
+.of-calendar-btn:hover {
+    background-color: var(--of-bg-body);
+    border-color: var(--of-primary);
+    color: var(--of-primary);
+}
+
+/* Grid Days of Week */
+.of-calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: var(--of-bg-secondary);
+    border-bottom: 1px solid var(--of-border-color);
+}
+
+.of-calendar-weekday {
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--of-text-muted);
+    text-transform: uppercase;
+}
+
+/* Grid Days (Matriz do Mês) */
+.of-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* Força os dias a terem altura mínima para podermos enxergar eventos */
+    grid-auto-rows: minmax(100px, auto);
+}
+
+/* Célula de cada Dia */
+.of-calendar-day {
+    padding: 0.5rem;
+    border-right: 1px solid var(--of-border-color);
+    border-bottom: 1px solid var(--of-border-color);
+    transition: background-color var(--of-transition-fast);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Remove a borda direita da última coluna */
+.of-calendar-day:nth-child(7n) {
+    border-right: none;
+}
+
+.of-calendar-day:hover {
+    background-color: rgba(79, 70, 229, 0.03); /* Hover sutil com a cor primária */
+}
+
+/* Dias de outros meses (meses adjacentes) */
+.of-calendar-day.is-muted {
+    background-color: var(--of-bg-secondary);
+    color: var(--of-text-muted);
+    opacity: 0.5;
+}
+
+/* Dia atual (Hoje) */
+.of-calendar-day.is-today {
+    background-color: rgba(79, 70, 229, 0.08);
+}
+.of-calendar-day.is-today .of-calendar-date {
+    background-color: var(--of-primary);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.of-calendar-date {
+    font-weight: 600;
+    font-size: 0.9rem;
+    align-self: flex-end;
+    margin-bottom: 0.25rem;
+}
+
+/* 
+   Eventos / Agendas dentro do dia 
+*/
+.of-calendar-events {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.of-calendar-event {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.4rem;
+    border-radius: var(--of-radius-sm);
+    color: white;
+    background-color: var(--of-primary); /* Default fallback */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    box-shadow: var(--of-shadow-sm);
+    transition: transform var(--of-transition-fast);
+}
+
+.of-calendar-event:hover {
+    transform: scale(1.02);
+}
+
+.of-calendar-event-time {
+    font-weight: 700;
+    opacity: 0.8;
+}

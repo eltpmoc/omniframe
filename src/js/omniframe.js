@@ -16,6 +16,11 @@ import { Sidebar } from './components/Sidebar.js';
 import { SmartSelect } from './components/SmartSelect.js';
 import { Tabs } from './components/Tabs.js';
 
+/* Componentes Interativos v1.3 */
+import { DragDrop } from './components/DragDrop.js';
+import { Kanban } from './components/Kanban.js';
+import { Calendar } from './components/Calendar.js';
+
 // Exportando para caso o dev queira instanciar via JS manualmente
 export {
     Alert,
@@ -29,5 +34,8 @@ export {
     Modal,
     Sidebar,
     SmartSelect,
-    Tabs
+    Tabs,
+    DragDrop,
+    Kanban,
+    Calendar
 };

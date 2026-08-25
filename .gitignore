@@ -17,3 +17,6 @@ coverage/
 
 # Misc
 *.log
+
+# App Teste do Usuario
+/test-app/
