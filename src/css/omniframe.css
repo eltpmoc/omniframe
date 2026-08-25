@@ -1,0 +1,35 @@
+/* ==========================================================================
+   OmniFrame v1.2 - All-in-One CSS
+   Importe este único arquivo no seu HTML se quiser acessar todo o framework
+   sem precisar declarar cada componente separadamente.
+   ========================================================================== */
+
+/* 1. Base e Variáveis (Sempre primeiro) */
+@import url('./variables.css');
+
+/* 2. Layout, Tipografia e Utilitários */
+@import url('./scrollbars.css');
+@import url('./layout.css');
+@import url('./typography.css');
+@import url('./utilities.css');
+
+/* 3. Componentes */
+@import url('./components/alerts.css');
+@import url('./components/carousel.css');
+@import url('./components/datatable.css');
+@import url('./components/dropdown.css');
+@import url('./components/fab.css');
+@import url('./components/forms.css');
+@import url('./components/globalsearch.css');
+@import url('./components/listbox.css');
+@import url('./components/listgroup.css');
+@import url('./components/media.css');
+@import url('./components/modal.css');
+@import url('./components/navbar.css');
+@import url('./components/panels.css');
+@import url('./components/sidebar.css');
+@import url('./components/smartselect.css');
+@import url('./components/tabs.css');
+
+/* Nota: O login.css foi omitido de propósito, pois é voltado apenas para 
+   telas de autenticação isoladas e não para a estrutura de um Dashboard. */
