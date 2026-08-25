@@ -1,0 +1,126 @@
+/* ==========================================================================
+   OmniFrame - Sidebar (Menu Lateral)
+   ========================================================================== */
+
+.of-sidebar {
+  position: fixed;
+  top: 0;
+  left: -280px; /* Escondido por padrão na esquerda */
+  width: 280px;
+  height: 100vh;
+  background-color: var(--of-bg-surface);
+  border-right: 1px solid var(--of-border-color);
+  box-shadow: var(--of-shadow-lg);
+  z-index: 1045;
+  transition: transform var(--of-transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modificador para aparecer na direita */
+.of-sidebar-right {
+  left: auto;
+  right: -280px;
+  border-right: none;
+  border-left: 1px solid var(--of-border-color);
+}
+
+.of-sidebar.is-open {
+  transform: translateX(280px);
+}
+
+.of-sidebar-right.is-open {
+  transform: translateX(-280px);
+}
+
+/* Backdrop para quando for offcanvas no mobile ou desktop */
+.of-sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--of-transition-normal);
+}
+.of-sidebar-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Layout interno da Sidebar */
+.of-sidebar-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--of-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.of-sidebar-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--of-text-main);
+}
+
+.of-sidebar-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+}
+
+/* Links da Sidebar */
+.of-sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.of-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  color: var(--of-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color var(--of-transition-fast), color var(--of-transition-fast);
+}
+
+.of-sidebar-link:hover,
+.of-sidebar-link.is-active {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--of-primary);
+  border-right: 3px solid var(--of-primary);
+}
+
+.of-sidebar-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Layout Fixo para Desktop (Opcional, empurra o conteúdo) */
+@media (min-width: 992px) {
+  .of-layout-has-sidebar .of-sidebar {
+    left: 0;
+    transform: none;
+  }
+  .of-layout-has-sidebar .of-sidebar-backdrop {
+    display: none;
+  }
+  .of-layout-has-sidebar .of-main-content {
+    margin-left: 280px;
+    transition: margin-left var(--of-transition-normal);
+  }
+}

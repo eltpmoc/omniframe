@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Login Minimalista</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css">
+    <link rel="stylesheet" href="../src/css/components/login.css">
+    <link rel="stylesheet" href="../src/css/components/modal.css"> <!-- Para os botões of-btn -->
+    <style>
+        .theme-float { position: absolute; top: 1rem; right: 1rem; }
+    </style>
+</head>
+<body style="margin: 0;">
+
+    <button class="of-btn of-btn-outline theme-float" id="toggleTheme">☀️ / 🌙</button>
+
+    <div class="of-login-wrapper of-login-minimal">
+        
+        <div class="of-login-minimal-container">
+            
+            <div class="of-login-header">
+                <!-- Logo Tipográfica Simples -->
+                <div style="font-size: 2rem; font-weight: 900; letter-spacing: -2px; color: var(--of-primary); margin-bottom: 2rem;">
+                    Omni<span style="color: var(--of-text-main);">Frame</span>.
+                </div>
+                
+                <h1>Fazer Login</h1>
+                <p>O framework que não te limita.</p>
+            </div>
+
+            <div class="of-form-group">
+                <input type="text" class="of-input" placeholder="E-mail" style="padding: 1rem; border-radius: var(--of-radius-md) var(--of-radius-md) 0 0; margin-bottom: -1px;">
+                <input type="password" class="of-input" placeholder="Senha" style="padding: 1rem; border-radius: 0 0 var(--of-radius-md) var(--of-radius-md);">
+            </div>
+
+            <button class="of-btn of-btn-primary of-btn-lg" style="width: 100%; margin-top: 1rem; border-radius: var(--of-radius-full);">Entrar</button>
+
+            <div class="of-login-footer-links">
+                Ainda não tem conta? <a href="#">Crie agora</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>

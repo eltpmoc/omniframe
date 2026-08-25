@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground Modais Dinâmicos</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/modal.css">
+    <style>
+        body { padding: 2rem; }
+        .controls { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        h1 { margin-top: 0; }
+        #statusOutput { margin-top: 2rem; padding: 1rem; background: var(--of-bg-surface); border-radius: var(--of-radius-md); border: 1px solid var(--of-border-color); }
+    </style>
+</head>
+<body>
+
+    <h1>Playground: Modais Dinâmicos</h1>
+    <p>Testes de instanciação HTML, Promises e Acessibilidade (Tente usar TAB e ESC).</p>
+
+    <div class="controls">
+        <button class="of-btn of-btn-primary" id="toggleTheme">Alternar Tema (Light/Dark)</button>
+        <button class="of-btn of-btn-secondary" data-toggle="modal" data-target="#htmlModal">Abrir Modal via HTML (data-attributes)</button>
+        <button class="of-btn of-btn-secondary" id="btnJsModal">Abrir Modal Custom (via JS)</button>
+        <button class="of-btn of-btn-secondary" id="btnConfirm">Testar Promise: Framework.confirm()</button>
+        <button class="of-btn of-btn-secondary" id="btnAlert">Testar Promise: Framework.alert()</button>
+    </div>
+
+    <div id="statusOutput">Aguardando interações...</div>
+
+    <!-- Modal instanciado via HTML -->
+    <div id="htmlModal" class="of-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="of-modal">
+            <div class="of-modal-header">
+                <h3 class="of-modal-title" id="modalTitle">Modal Instanciado via HTML</h3>
+                <button class="of-modal-close" data-dismiss="modal" aria-label="Fechar">&times;</button>
+            </div>
+            <div class="of-modal-body">
+                <p>Este modal já estava no DOM e foi aberto automaticamente graças ao atributo <code>data-toggle="modal"</code> do botão.</p>
+                <input type="text" placeholder="Foco automático e Focus Trap!" style="width: 100%; padding: 0.5rem; margin-top: 1rem;">
+            </div>
+            <div class="of-modal-footer">
+                <button class="of-btn of-btn-secondary" data-dismiss="modal">Fechar</button>
+                <button class="of-btn of-btn-primary" data-dismiss="modal">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { Modal } from '../src/js/components/Modal.js';
+
+        const output = document.getElementById('statusOutput');
+
+        // Toggle Theme
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // Instanciar custom modal via JS
+        document.getElementById('btnJsModal').addEventListener('click', () => {
+            const customModal = new Modal({
+                title: 'Modal Injetado pelo JS',
+                content: '<p>Este modal não existia no DOM. O OmniFrame montou a estrutura HTML e adicionou as classes dinamicamente. Ele será destruído ao fechar.</p>',
+                size: 'lg',
+                buttons: [
+                    { text: 'Entendi', class: 'of-btn-primary', onClick: (e, inst) => inst.close() }
+                ]
+            });
+            customModal.open();
+        });
+
+        // Testar Smart Alerts (Promise .confirm)
+        document.getElementById('btnConfirm').addEventListener('click', () => {
+            Modal.confirm('Você tem certeza que deseja excluir esse registro permanentemente?', 'Deletar Registro')
+                .then(resultado => {
+                    output.innerHTML = `Retorno da Promise (Confirm): <strong>${resultado ? 'Confirmado (true)' : 'Cancelado (false)'}</strong>`;
+                    output.style.color = resultado ? 'var(--of-success)' : 'var(--of-danger)';
+                });
+        });
+
+        // Testar Smart Alerts (Promise .alert)
+        document.getElementById('btnAlert').addEventListener('click', () => {
+            Modal.alert('A operação foi concluída com sucesso!', 'Sucesso')
+                .then(() => {
+                    output.innerHTML = `Retorno da Promise (Alert): <strong>Resolvida após fechamento.</strong>`;
+                    output.style.color = 'var(--of-info)';
+                });
+        });
+    </script>
+</body>
+</html>

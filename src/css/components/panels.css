@@ -1,0 +1,94 @@
+/* ==========================================================================
+   OmniFrame - Panels & Scrollable Areas
+   ========================================================================== */
+
+/* Base Panel / Card */
+.of-panel,
+.of-card {
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-lg);
+  box-shadow: var(--of-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Mantém os cantos arredondados limpos */
+  transition: box-shadow var(--of-transition-fast);
+}
+
+.of-panel:hover,
+.of-card:hover {
+  box-shadow: var(--of-shadow-md);
+}
+
+/* Header e Footer do Panel / Card */
+.of-panel-header,
+.of-card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--of-border-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--of-text-main);
+  background-color: var(--of-bg-body); /* Contraste sutil */
+}
+
+.of-panel-footer,
+.of-card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--of-border-color);
+  background-color: var(--of-bg-body);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Corpo do Panel / Card */
+.of-panel-body,
+.of-card-body {
+  padding: 1.5rem;
+  color: var(--of-text-main);
+  flex: 1; /* Preenche o espaço disponível se o painel tiver altura fixa */
+}
+
+/* Variantes de Scroll */
+/* Somente Y (Vertical) */
+.of-panel-scroll-y {
+  max-height: 400px; /* Altura padrão customizável inline ou com utilitários */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Somente X (Horizontal) */
+.of-panel-scroll-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap; /* Ajuda a forçar scroll horizontal para itens inline */
+}
+
+/* Ambos */
+.of-panel-scroll-both {
+  max-height: 400px;
+  overflow: auto;
+}
+
+/* Panel Glassmorphism */
+.of-panel-glass {
+  background-color: rgba(var(--of-bg-surface-rgb, 255, 255, 255), 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Extras para Cards */
+.of-card-img-top {
+  width: 100%;
+  border-top-left-radius: calc(var(--of-radius-lg) - 1px);
+  border-top-right-radius: calc(var(--of-radius-lg) - 1px);
+  object-fit: cover;
+}
+
+.of-card-img-bottom {
+  width: 100%;
+  border-bottom-left-radius: calc(var(--of-radius-lg) - 1px);
+  border-bottom-right-radius: calc(var(--of-radius-lg) - 1px);
+  object-fit: cover;
+}

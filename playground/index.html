@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Dashboard Central</title>
+    
+    <!-- CSS Base (Importando TODO o Framework) -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/scrollbars.css">
+    <link rel="stylesheet" href="../src/css/layout.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css">
+    <link rel="stylesheet" href="../src/css/components/datatable.css">
+    <link rel="stylesheet" href="../src/css/components/modal.css">
+    <link rel="stylesheet" href="../src/css/components/smartselect.css">
+    <link rel="stylesheet" href="../src/css/components/tabs.css">
+    <link rel="stylesheet" href="../src/css/components/fab.css">
+    <link rel="stylesheet" href="../src/css/components/globalsearch.css">
+    <link rel="stylesheet" href="../src/css/components/panels.css">
+    <link rel="stylesheet" href="../src/css/typography.css">
+    <link rel="stylesheet" href="../src/css/components/listbox.css">
+    <link rel="stylesheet" href="../src/css/components/media.css">
+    <link rel="stylesheet" href="../src/css/components/carousel.css">
+    <link rel="stylesheet" href="../src/css/utilities.css">
+    <link rel="stylesheet" href="../src/css/components/navbar.css">
+    <link rel="stylesheet" href="../src/css/components/sidebar.css">
+    <link rel="stylesheet" href="../src/css/components/dropdown.css">
+    <link rel="stylesheet" href="../src/css/components/alerts.css">
+    <link rel="stylesheet" href="../src/css/components/listgroup.css">
+
+    <!-- CSS Específico do Dashboard Playground (Apenas Layout Extra) -->
+    <style>
+        .of-main-content {
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        /* Ajuste do botão theme toggle para casar com a navbar */
+        #toggleTheme {
+            margin-left: auto;
+        }
+
+        /* Card Container para as demonstrações */
+        .demo-card {
+            background-color: var(--of-bg-surface);
+            border: 1px solid var(--of-border-color);
+            border-radius: var(--of-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--of-shadow-sm);
+            transition: box-shadow var(--of-transition-fast);
+        }
+        .demo-card:hover {
+            box-shadow: var(--of-shadow-lg); /* Mostrando a nova variável de elevação */
+        }
+
+        .demo-title {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            color: var(--of-text-main);
+            border-bottom: 2px solid var(--of-bg-body);
+            padding-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body class="of-layout-has-sidebar">
+
+    <!-- Sidebar Oficial (v1.2) -->
+    <aside class="of-sidebar" id="mainSidebar">
+        <div class="of-sidebar-header">
+            <h1 class="of-sidebar-title" style="display: flex; align-items: center; gap: 0.5rem; color: var(--of-primary);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                OmniFrame
+            </h1>
+            <button class="of-close of-close-white d-lg-none" data-dismiss="sidebar" aria-label="Fechar menu"></button>
+        </div>
+        <div class="of-sidebar-body">
+            <ul class="of-sidebar-nav">
+                <li><a href="#" class="of-sidebar-link is-active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Visão Geral</a></li>
+                <li><a href="login-card.html" target="_blank" class="of-sidebar-link"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Autenticação</a></li>
+                <li>
+                    <a href="#" class="of-sidebar-link">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg> Documentação
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="of-main-content">
+        
+        <!-- Navbar Oficial (v1.2) -->
+        <nav class="of-navbar">
+            <button class="of-navbar-toggler" data-toggle="sidebar" data-target="#mainSidebar" aria-label="Toggle Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            
+            <a href="#" class="of-navbar-brand d-lg-none">OmniFrame</a>
+            
+            <div class="of-navbar-collapse">
+                <ul class="of-navbar-nav">
+                    <li><a href="#" class="of-nav-link is-active">Componentes v1.2</a></li>
+                    <li class="of-dropdown">
+                        <a href="#" class="of-nav-link of-dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Módulos Extras</a>
+                        <ul class="of-dropdown-menu">
+                            <li><a href="#" class="of-dropdown-item">Análises</a></li>
+                            <li><a href="#" class="of-dropdown-item">Relatórios</a></li>
+                            <li class="of-dropdown-divider"></li>
+                            <li><a href="#" class="of-dropdown-item text-danger">Excluir Conta</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <!-- Global Search Trigger -->
+                    <button class="of-globalsearch-trigger-btn" data-toggle="globalsearch">
+                        Pesquisar... <span class="of-globalsearch-kbd">Ctrl /</span>
+                    </button>
+                    <!-- Theme Toggle -->
+                    <button id="toggleTheme" class="of-btn of-btn-ghost" style="border-radius: var(--of-radius-full);" aria-label="Alternar Tema">🌙</button>
+                </div>
+            </div>
+        </nav>
+
+        <div style="padding: 2rem 0; display: flex; flex-direction: column; gap: 2rem;">
+            
+            <!-- COMPONENTE: ALERTS & LISTGROUPS (v1.2) -->
+            <div class="demo-card" data-searchable data-search-term="alertas feedback listas listgroup dismiss">
+                <h2 class="demo-title">Alerts & List Groups (v1.2)</h2>
+                <div class="of-grid">
+                    <div class="of-g-col-6">
+                        <label class="of-label">Alertas Dismissíveis</label>
+                        <div class="of-alert of-alert-success of-alert-dismissible" role="alert">
+                            <div class="of-alert-content">
+                                <h3 class="of-alert-title">Sucesso!</h3>
+                                <p class="of-alert-text">Operação realizada com perfeição na versão 1.2.</p>
+                            </div>
+                            <button class="of-close" data-dismiss="alert" aria-label="Fechar alerta"></button>
+                        </div>
+                        <div class="of-alert of-alert-warning of-alert-dismissible" role="alert">
+                            <div class="of-alert-content">
+                                <h3 class="of-alert-title">Atenção Necessária</h3>
+                                <p class="of-alert-text">Recomendamos verificar as configurações de segurança do sistema.</p>
+                            </div>
+                            <button class="of-close" data-dismiss="alert" aria-label="Fechar alerta"></button>
+                        </div>
+                    </div>
+                    <div class="of-g-col-6">
+                        <label class="of-label">Agrupador de Listas interativo</label>
+                        <div class="of-list-group">
+                            <a href="#" class="of-list-group-item is-active">Mensagens Recebidas (4)</a>
+                            <a href="#" class="of-list-group-item">Atualizações de Sistema</a>
+                            <a href="#" class="of-list-group-item">Rascunhos</a>
+                            <a href="#" class="of-list-group-item is-disabled" aria-disabled="true">Lixeira (Vazia)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPONENTE: GRID SYSTEM & PANELS (v1.1) -->
+            <div class="demo-card" data-searchable data-search-term="layout grid colunas painéis scroll">
+                <h2 class="demo-title">Grid System & Panels (v1.1)</h2>
+                
+                <div class="of-grid" style="margin-bottom: 2rem;">
+                    <!-- Panel Simples -->
+                    <div class="of-g-col-4">
+                        <div class="of-panel">
+                            <div class="of-panel-header">Panel Simples (4 col)</div>
+                            <div class="of-panel-body">
+                                <p>Este é um painel básico usando o novo sistema de 12 colunas (<code>.of-g-col-4</code>).</p>
+                                <p>Possui sombra sutil e bordas arredondadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Panel com Scroll Vertical -->
+                    <div class="of-g-col-4">
+                        <div class="of-panel">
+                            <div class="of-panel-header">Scroll Vertical Custom</div>
+                            <div class="of-panel-body of-panel-scroll-y" style="max-height: 150px;" tabindex="0" role="region" aria-label="Conteúdo Rolável">
+                                <p>Use a barra de rolagem (reestilizada globalmente no <code>scrollbars.css</code>).</p>
+                                <p>Muitos conteúdos geram barra.</p>
+                                <p>Linha extra.</p>
+                                <p>Mais uma linha.</p>
+                                <p>E outra linha.</p>
+                                <p>Última linha para forçar o scroll.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Glassmorphism -->
+                    <div class="of-g-col-4">
+                        <div class="of-panel of-panel-glass">
+                            <div class="of-panel-header" style="background: transparent;">Painel Translúcido</div>
+                            <div class="of-panel-body">
+                                <p>Usando <code>.of-panel-glass</code>.</p>
+                                <button class="of-btn of-btn-primary of-w-100">Ação no Grid</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="of-text-muted">A barra de rolagem do navegador agora é globalmente moderna!</p>
+            </div>
+
+            <!-- COMPONENTE: FORMS & BOTÕES & SMART SELECT -->
+            <div class="demo-card" data-searchable data-search-term="formulários botões inputs selects">
+                <h2 class="demo-title">Form UI Kit & Smart Select</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <!-- Coluna 1: Inputs, Textareas e ListBox -->
+                    <div>
+                        <div class="of-form-group">
+                            <label class="of-label" for="inp-nome">Nome Completo</label>
+                            <input type="text" id="inp-nome" class="of-input" placeholder="Seu nome">
+                        </div>
+                        <div class="of-form-group">
+                            <label class="of-label">Framework Favorito <span class="of-text-muted">(Smart Select)</span></label>
+                            <select data-smart-select>
+                                <option value="" disabled selected>Escolha um...</option>
+                                <option value="omni">OmniFrame</option>
+                                <option value="boot">Bootstrap</option>
+                                <option value="tail">Tailwind</option>
+                            </select>
+                        </div>
+                        <div class="of-form-group">
+                            <label class="of-label">Categorias <span class="of-text-muted">(Novo: ListBox c/ Busca)</span></label>
+                            <select data-listbox>
+                                <option value="front">Frontend</option>
+                                <option value="back">Backend</option>
+                                <option value="db">Banco de Dados</option>
+                                <option value="devops">DevOps</option>
+                                <option value="ai">Inteligência Artificial</option>
+                            </select>
+                        </div>
+                        <div class="of-form-group">
+                            <label class="of-label" for="inp-email">E-mail (Estado Inválido)</label>
+                            <input type="email" id="inp-email" class="of-input is-invalid" value="usuario@">
+                            <div class="of-feedback-invalid">E-mail inválido.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna 2: Controles Premium e Tipografia -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        
+                        <!-- Toggle e Range -->
+                        <div style="background: var(--of-bg-surface-hover); padding: 1.5rem; border-radius: var(--of-radius-lg);">
+                            <label class="of-label" style="display: block; margin-bottom: 1rem;">Notificações & Volume (v1.1)</label>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span>Ativar modo silencioso?</span>
+                                <input type="checkbox" class="of-switch" aria-label="Ativar modo silencioso">
+                            </div>
+                            
+                            <label class="of-label" for="inp-volume" style="display: block; margin-bottom: 0.5rem; margin-top: 1rem;">Volume Principal</label>
+                            <input type="range" id="inp-volume" class="of-range" min="0" max="100" value="50">
+                        </div>
+
+                        <!-- Checkboxes & Radios -->
+                        <div style="background: var(--of-bg-surface-hover); padding: 1.5rem; border-radius: var(--of-radius-lg);">
+                            <label class="of-label" style="display: block; margin-bottom: 1rem;">Preferências de Notificação</label>
+                            <label class="of-check-group">
+                                <input type="checkbox" class="of-checkbox" checked>
+                                <span>Receber e-mails promocionais</span>
+                            </label>
+                            <label class="of-check-group">
+                                <input type="checkbox" class="of-checkbox">
+                                <span>Receber SMS</span>
+                            </label>
+                        </div>
+
+                        <!-- Botões -->
+                        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                            <button class="of-btn of-btn-primary">Botão Primário</button>
+                            <button class="of-btn of-btn-secondary">Botão Secundário</button>
+                            <button class="of-btn of-btn-outline">Botão Delineado</button>
+                            <button class="of-btn of-btn-soft">Botão Soft</button>
+                            <button class="of-btn of-btn-3d">Botão 3D</button>
+                        </div>
+
+                        <!-- Tipografia Links -->
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--of-border-color);">
+                            <label class="of-label">Links Avançados (v1.1)</label>
+                            <p style="margin-top: 0.5rem;">
+                                <a href="#" class="of-link">Link Padrão</a> | 
+                                <a href="#" class="of-link-underline">Sublinhado Animado</a> | 
+                                <a href="#" class="of-link-gradient">Link Gradiente</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPONENTE: MULTIMÍDIA E CARROSSÉIS (v1.1) -->
+            <div class="demo-card" data-searchable data-search-term="multimídia vídeo áudio carrossel imagens imagens responsive">
+                <h2 class="demo-title">Media Kit & Imagens Responsivas (v1.1)</h2>
+                
+                <div class="of-grid">
+                    <!-- Carousel -->
+                    <div class="of-g-col-6">
+                        <label class="of-label">Carrossel de Imagens</label>
+                        <div class="of-carousel" data-carousel>
+                            <div class="of-carousel-inner">
+                                <div class="of-carousel-item">
+                                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Code 1">
+                                </div>
+                                <div class="of-carousel-item">
+                                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Code 2">
+                                </div>
+                            </div>
+                            <!-- Controles -->
+                            <button class="of-carousel-control of-carousel-prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                            <button class="of-carousel-control of-carousel-next" aria-label="Próximo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+                            <!-- Indicadores -->
+                            <div class="of-carousel-indicators">
+                                <button class="of-carousel-indicator is-active" aria-label="Ir para o slide 1"></button>
+                                <button class="of-carousel-indicator" aria-label="Ir para o slide 2"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Players -->
+                    <div class="of-g-col-6" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div>
+                            <label class="of-label">Custom Audio Player</label>
+                            <div class="of-media-player" data-media-player>
+                                <!-- Usando um áudio público de teste -->
+                                <audio src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="of-label">Imagem com Overlay e Sombra</label>
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" class="of-img-fluid of-img-rounded of-img-shadow" alt="Code Mini">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPONENTE: TABS & MODAIS -->
+            <div class="demo-card" data-searchable data-search-term="abas tabs modais janelas dialogs">
+                <h2 class="demo-title">Abas Acessíveis & Smart Modals</h2>
+                
+                <!-- TABS -->
+                <div class="of-tabs-wrapper" style="margin-bottom: 2rem;">
+                    <div class="of-tabs-list" role="tablist">
+                        <button class="of-tab is-active" data-toggle="tab" data-target="#t1">Informações</button>
+                        <button class="of-tab" data-toggle="tab" data-target="#t2">Testar Modais (Ações)</button>
+                    </div>
+                    <div class="of-tab-panel is-active" id="t1">
+                        <div style="color: var(--of-text-main); font-weight: 700; font-size: 1.1rem; margin-top: 1rem;">
+                            Navegue pelas abas usando seu mouse, ou foque nelas e use as Setas do teclado!
+                        </div>
+                    </div>
+                    <div class="of-tab-panel" id="t2">
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="of-btn of-btn-primary" id="btnAlert">Abrir Modal de Alerta</button>
+                            <button class="of-btn of-btn-outline" style="color: var(--of-danger); border-color: var(--of-danger);" id="btnConfirm">Modal de Confirmação (Promise)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPONENTE: DATATABLE -->
+            <div class="demo-card" data-searchable data-search-term="tabelas datatables grids listas">
+                <h2 class="demo-title">DataTables (Auto-Render)</h2>
+                <table class="of-table" id="dashboardTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Airi Satou</td><td>Accountant</td><td>Ativo</td></tr>
+                        <tr><td>Angelica Ramos</td><td>CEO</td><td>Ativo</td></tr>
+                        <tr><td>Ashton Cox</td><td>Technical Author</td><td>Férias</td></tr>
+                        <tr><td>Bradley Greer</td><td>Software Engineer</td><td>Ativo</td></tr>
+                        <tr><td>Brenden Wagner</td><td>Software Engineer</td><td>Inativo</td></tr>
+                        <tr><td>Brielle Williamson</td><td>Integration Specialist</td><td>Ativo</td></tr>
+                        <tr><td>Bruno Nash</td><td>Software Engineer</td><td>Ativo</td></tr>
+                        <tr><td>Caesar Vance</td><td>Pre-Sales Support</td><td>Férias</td></tr>
+                        <tr><td>Cara Stevens</td><td>Sales Assistant</td><td>Ativo</td></tr>
+                        <tr><td>Cedric Kelly</td><td>Senior Javascript Developer</td><td>Ativo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- COMPONENTE: LOGIN TEMPLATES -->
+            <div class="demo-card" data-searchable data-search-term="login autenticação entrar telas">
+                <h2 class="demo-title">Login Templates (Premium Layouts)</h2>
+                <p class="of-text-muted" style="margin-bottom: 1.5rem;">Como essas páginas são Full-Screen, clique nos botões abaixo para visualizá-las.</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <a href="login-split.html" target="_blank" class="of-btn of-btn-outline" style="text-decoration: none;">Split Screen ↗</a>
+                    <a href="login-card.html" target="_blank" class="of-btn of-btn-outline" style="text-decoration: none;">Glassmorphism ↗</a>
+                    <a href="login-minimal.html" target="_blank" class="of-btn of-btn-outline" style="text-decoration: none;">Minimalista ↗</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- COMPONENTE: FAB -->
+    <div class="of-fab-wrapper" data-toggle="fab">
+        <ul class="of-fab-menu">
+            <li class="of-fab-item"><span class="of-fab-label">Suporte</span><button class="of-fab-btn">❓</button></li>
+            <li class="of-fab-item"><span class="of-fab-label">Configurações</span><button class="of-fab-btn">⚙️</button></li>
+        </ul>
+        <button class="of-fab-btn of-fab-trigger" aria-label="Abrir menu flutuante">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+    </div>
+
+    <!-- Importação de todos os módulos lógicos -->
+    <script type="module">
+        import { SmartSelect } from '../src/js/components/SmartSelect.js';
+        import { Tabs } from '../src/js/components/Tabs.js';
+        import { FAB } from '../src/js/components/FAB.js';
+        import { GlobalSearch } from '../src/js/components/GlobalSearch.js';
+        import { Modal } from '../src/js/components/Modal.js';
+        import { DataTable } from '../src/js/components/DataTable.js';
+        import { ListBox } from '../src/js/components/ListBox.js';
+        import { Media } from '../src/js/components/Media.js';
+        import { Carousel } from '../src/js/components/Carousel.js';
+        import { Sidebar } from '../src/js/components/Sidebar.js';
+        import { Dropdown } from '../src/js/components/Dropdown.js';
+        import { Alert } from '../src/js/components/Alert.js';
+
+        // 1. Theme Toggle
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // 2. Global Search
+        window.OmniFrameGlobalSearchInstance = new GlobalSearch({ hotkey: '/' });
+
+        // 3. DataTable Fake Data
+        new DataTable('#dashboardTable', { pageSize: 5 });
+
+        // 4. Modais via Promises
+        document.getElementById('btnAlert').addEventListener('click', () => {
+            Modal.alert({ title: 'Tudo Certo!', content: 'O sistema carregou 100% dos componentes com sucesso.', okText: 'Maravilha' });
+        });
+
+        document.getElementById('btnConfirm').addEventListener('click', async () => {
+            const confirmed = await Modal.confirm({
+                title: 'Deletar Banco de Dados?',
+                content: 'Esta ação destruirá toda a tabela de produção. Tem certeza?',
+                okText: 'Sim, Destruir',
+                cancelText: 'Cancelar Ação'
+            });
+            if (confirmed) alert("Ação Executada: Você deletou tudo!");
+        });
+
+    </script>
+</body>
+</html>

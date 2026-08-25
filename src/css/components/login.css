@@ -1,0 +1,186 @@
+/* ==========================================================================
+   OmniFrame - Login Templates
+   ========================================================================== */
+
+/* Layout Base Universal para os templates Fullscreen */
+.of-login-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  overflow-x: hidden;
+  background-color: var(--of-bg-body);
+}
+
+/* ==========================================================================
+   Template 1: Tela Dividida (Split Screen)
+   ========================================================================== */
+.of-login-split {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.of-login-split-image {
+  display: none; /* Mobile first: escondido no celular */
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Overlay sutil na imagem para garantir leitura da logo, se houver */
+.of-login-split-image::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(79, 70, 229, 0.8));
+}
+
+.of-login-split-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--of-bg-surface);
+}
+
+.of-login-split-form-inner {
+  width: 100%;
+  max-width: 400px;
+}
+
+@media (min-width: 768px) {
+  .of-login-split-image { display: block; }
+}
+
+/* ==========================================================================
+   Template 2: Card Central com Glassmorphism
+   ========================================================================== */
+.of-login-card-layout {
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 1rem;
+}
+
+.of-login-glass-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  border-radius: var(--of-radius-lg);
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  color: #fff; /* Força texto branco no card glass por conta do fundo */
+}
+
+/* Ajustes finos do Form UI Kit para dentro do Glass Card */
+.of-login-glass-card .of-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.of-login-glass-card .of-input {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.of-login-glass-card .of-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.of-login-glass-card .of-input:focus {
+  border-color: var(--of-primary-hover);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.of-login-glass-card .of-text-muted {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==========================================================================
+   Template 3: Minimalista B2B
+   ========================================================================== */
+.of-login-minimal {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.of-login-minimal-container {
+  width: 100%;
+  max-width: 380px;
+}
+
+.of-login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.of-login-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: var(--of-text-main);
+  letter-spacing: -0.025em;
+}
+
+.of-login-header p {
+  color: var(--of-text-muted);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.of-login-footer-links {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.of-login-footer-links a {
+  color: var(--of-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--of-transition-fast);
+}
+
+.of-login-footer-links a:hover {
+  color: var(--of-primary-hover);
+  text-decoration: underline;
+}
+
+/* Utilitário estrutural extra para botões de OAuth (Google/Apple) */
+.of-login-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: var(--of-text-muted);
+  font-size: 0.875rem;
+}
+.of-login-divider::before,
+.of-login-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--of-border-color);
+}
+.of-login-divider::before { margin-right: 0.75rem; }
+.of-login-divider::after { margin-left: 0.75rem; }
+
+/* Correção visual do divisor no Glass Card */
+.of-login-glass-card .of-login-divider {
+  color: rgba(255, 255, 255, 0.7);
+}
+.of-login-glass-card .of-login-divider::before,
+.of-login-glass-card .of-login-divider::after {
+  border-color: rgba(255, 255, 255, 0.2);
+}

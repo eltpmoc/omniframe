@@ -1,0 +1,36 @@
+/* ==========================================================================
+   OmniFrame - Custom Scrollbars
+   ========================================================================== */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--of-border-color) transparent;
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--of-radius-full);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--of-border-color);
+  border-radius: var(--of-radius-full);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--of-text-muted);
+}
+
+/* Área do canto (quando cruza H e V) */
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -1,0 +1,118 @@
+/* ==========================================================================
+   OmniFrame - Navbar
+   ========================================================================== */
+
+.of-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--of-bg-surface);
+  border-bottom: 1px solid var(--of-border-color);
+  box-shadow: var(--of-shadow-sm);
+  position: relative;
+}
+
+/* Marca / Logotipo */
+.of-navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--of-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 2rem;
+}
+.of-navbar-brand:hover {
+  color: var(--of-primary-hover, #4338ca);
+}
+
+/* Links de Navegação */
+.of-navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.of-nav-link {
+  color: var(--of-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color var(--of-transition-fast);
+  position: relative;
+}
+
+.of-nav-link:hover,
+.of-nav-link.is-active {
+  color: var(--of-text-main);
+}
+
+.of-nav-link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--of-primary);
+  border-radius: var(--of-radius-full);
+}
+
+/* Área de Colapso (Para Mobile) */
+.of-navbar-collapse {
+  display: flex;
+  align-items: center;
+  flex-basis: auto;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+/* Toggler (Mobile) */
+.of-navbar-toggler {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--of-border-color);
+  color: var(--of-text-main);
+  padding: 0.5rem;
+  border-radius: var(--of-radius-sm);
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Responsividade (Abaixo de 992px vira hambúrguer) */
+@media (max-width: 991.98px) {
+  .of-navbar-toggler {
+    display: block;
+  }
+  
+  .of-navbar-collapse {
+    display: none; /* Escondido por padrão no mobile */
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--of-border-color);
+  }
+
+  .of-navbar-collapse.is-open {
+    display: flex;
+  }
+
+  .of-navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .of-nav-link {
+    width: 100%;
+  }
+}

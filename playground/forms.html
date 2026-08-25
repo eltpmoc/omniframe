@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground Form UI Kit</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/modal.css"> <!-- Para herdar of-btn -->
+    <link rel="stylesheet" href="../src/css/components/forms.css">
+    <style>
+        body { padding: 2rem; max-width: 800px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .theme-switcher { margin-bottom: 2rem; }
+        h2 { margin-top: 3rem; border-bottom: 1px solid var(--of-border-color); padding-bottom: 0.5rem; }
+        .flex-gap { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+
+    <div class="theme-switcher">
+        <button class="of-btn of-btn-primary" id="toggleTheme">Alternar Tema (Light/Dark)</button>
+    </div>
+
+    <h1>Playground: Form UI Kit</h1>
+    <p>Componentes acessíveis, responsivos e prontos para o Dark Mode.</p>
+
+    <div class="grid">
+        <!-- Coluna 1 -->
+        <div>
+            <h2>Inputs de Texto</h2>
+            
+            <div class="of-form-group">
+                <label class="of-label">Nome Completo</label>
+                <input type="text" class="of-input" placeholder="João da Silva">
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Email Corporativo</label>
+                <input type="email" class="of-input" placeholder="joao@empresa.com">
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Senha (Desabilitado)</label>
+                <input type="password" class="of-input" value="123456" disabled>
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Biografia</label>
+                <textarea class="of-textarea" rows="3" placeholder="Fale sobre você..."></textarea>
+            </div>
+            
+            <h2>Validação Visual</h2>
+            
+            <div class="of-form-group">
+                <label class="of-label">Usuário</label>
+                <input type="text" class="of-input is-valid" value="joaosilva89">
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Senha Atual</label>
+                <input type="password" class="of-input is-invalid" value="123">
+                <span class="of-feedback-invalid">A senha deve ter pelo menos 8 caracteres.</span>
+            </div>
+        </div>
+
+        <!-- Coluna 2 -->
+        <div>
+            <h2>Select & Radios/Checkboxes</h2>
+
+            <div class="of-form-group">
+                <label class="of-label">Departamento</label>
+                <select class="of-select">
+                    <option value="" disabled selected>Selecione um departamento...</option>
+                    <option value="ti">Tecnologia (TI)</option>
+                    <option value="rh">Recursos Humanos</option>
+                    <option value="mkt">Marketing</option>
+                </select>
+            </div>
+
+            <label class="of-label">Preferência de Contato</label>
+            <label class="of-check-group">
+                <input type="radio" name="contato" class="of-radio" checked>
+                <span>Email</span>
+            </label>
+            <label class="of-check-group">
+                <input type="radio" name="contato" class="of-radio">
+                <span>Telefone</span>
+            </label>
+
+            <br>
+            
+            <label class="of-label">Configurações da Conta</label>
+            <label class="of-check-group">
+                <input type="checkbox" class="of-checkbox" checked>
+                <span>Receber newsletter semanal</span>
+            </label>
+            <label class="of-check-group">
+                <input type="checkbox" class="of-checkbox">
+                <span>Notificações por SMS</span>
+            </label>
+
+            <h2>Variações de Botão</h2>
+            
+            <div class="flex-gap" style="margin-bottom: 1rem;">
+                <button class="of-btn of-btn-primary">Solid Primary</button>
+                <button class="of-btn of-btn-secondary">Solid Secondary</button>
+            </div>
+            
+            <div class="flex-gap" style="margin-bottom: 1rem;">
+                <button class="of-btn of-btn-outline">Outline Primary</button>
+                <button class="of-btn of-btn-ghost">Ghost Button</button>
+            </div>
+            
+            <div class="flex-gap">
+                <button class="of-btn of-btn-primary of-btn-sm">Pequeno</button>
+                <button class="of-btn of-btn-primary">Normal</button>
+                <button class="of-btn of-btn-primary of-btn-lg">Grande</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Test reports
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Coverage
+coverage/
+
+# OS/Editor specific
+.DS_Store
+.vscode/
+.idea/
+
+# Misc
+*.log

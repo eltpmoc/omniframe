@@ -1,0 +1,209 @@
+/* ==========================================================================
+   OmniFrame - Modal Component
+   ========================================================================== */
+
+/* Backdrop (Fundo escurecido) */
+.of-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); /* Glassmorphism leve */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--of-transition-normal), visibility var(--of-transition-normal);
+}
+
+.of-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Box */
+.of-modal {
+  background-color: rgba(var(--of-bg-surface-rgb, 255, 255, 255), 0.85); /* Exige variável base RGB ou uso indireto. No nosso caso, hardcodado como fallback ou usando CSS variables sólidas misturadas */
+  background: var(--of-bg-surface); /* Fallback */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Brilho leve nas bordas de vidro */
+  border-radius: 1.5rem; /* Mais curvo */
+  box-shadow: var(--of-shadow-hover);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+  /* Animação inicial de baixo para cima (Slide Up + Fade) */
+  transform: translateY(20px) scale(0.95);
+  transition: transform var(--of-transition-normal);
+}
+
+.of-modal-backdrop.is-open .of-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Modificadores de tamanho */
+.of-modal-sm { max-width: 300px; }
+.of-modal-lg { max-width: 800px; }
+.of-modal-xl { max-width: 1140px; }
+
+/* Cabeçalho do Modal */
+.of-modal-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--of-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab; /* Indicador de drag */
+  user-select: none;
+}
+.of-modal-header:active {
+  cursor: grabbing;
+}
+
+.of-modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--of-text-main);
+}
+
+.of-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.of-modal-control-btn {
+  background: transparent;
+  border: none;
+  color: var(--of-text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color var(--of-transition-fast), transform var(--of-transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.of-modal-control-btn:hover {
+  color: var(--of-text-main);
+  transform: scale(1.1);
+}
+
+.of-modal-close:hover {
+  color: var(--of-danger);
+}
+
+/* Super Modal States (Maximizado/Minimizado) */
+.of-modal.is-maximized {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.of-modal.is-maximized .of-modal-body {
+  flex: 1;
+}
+
+.of-modal.is-minimized {
+  height: 50px !important;
+  min-height: 50px !important;
+  overflow: hidden;
+  border-radius: var(--of-radius-lg) var(--of-radius-lg) 0 0;
+  top: auto !important;
+  bottom: 0 !important;
+  left: 1rem !important;
+  width: 300px !important;
+  transform: none !important;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+}
+.of-modal.is-minimized .of-modal-body,
+.of-modal.is-minimized .of-modal-footer {
+  display: none !important;
+}
+.of-modal.is-minimized .of-modal-header {
+  border-bottom: none;
+}
+
+/* Corpo do Modal */
+.of-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  color: var(--of-text-main);
+  font-size: 1rem;
+}
+
+/* Rodapé do Modal */
+.of-modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--of-border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background-color: var(--of-bg-body); /* Um tom levemente diferente pro footer */
+}
+
+/* Botões rápidos (Caso form-ui-kit ainda não esteja carregado) */
+.of-btn {
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--of-radius-full); /* Pill Shape */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all var(--of-transition-normal);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-shadow: var(--of-shadow-sm);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.of-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--of-shadow-md);
+}
+
+.of-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.of-btn-primary {
+  background: linear-gradient(135deg, var(--of-primary), var(--of-secondary));
+  color: var(--of-primary-content);
+  border: none;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.of-btn-primary:hover {
+  background: linear-gradient(135deg, var(--of-primary-hover), var(--of-primary));
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+}
+
+.of-btn-secondary {
+  background-color: var(--of-bg-surface-hover);
+  color: var(--of-text-main);
+}
+
+.of-btn-secondary:hover {
+  background-color: var(--of-border-color);
+}

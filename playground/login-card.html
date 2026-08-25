@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Login Glass Card</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css">
+    <link rel="stylesheet" href="../src/css/components/login.css">
+    <link rel="stylesheet" href="../src/css/components/modal.css"> <!-- Para os botões of-btn -->
+</head>
+<body style="margin: 0;">
+
+    <div class="of-login-wrapper of-login-card-layout" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');">
+        
+        <!-- O Card com Efeito Glass -->
+        <div class="of-login-glass-card">
+            
+            <div class="of-login-header">
+                <!-- Simulando logo abstrata -->
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #fff; margin-bottom: 1rem;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                
+                <h1 style="color: #fff;">Acesse sua conta</h1>
+                <p class="of-text-muted">Entre com as suas credenciais</p>
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Usuário</label>
+                <input type="text" class="of-input" placeholder="admin">
+            </div>
+
+            <div class="of-form-group">
+                <label class="of-label">Senha</label>
+                <input type="password" class="of-input" placeholder="••••••••">
+            </div>
+
+            <button class="of-btn of-btn-primary of-btn-lg" style="width: 100%; margin-top: 1rem;">Autenticar</button>
+            
+            <div class="of-login-divider">Segurança Avançada</div>
+            
+            <p style="text-align: center; font-size: 0.875rem; color: rgba(255,255,255,0.7); margin: 0;">
+                Protegido por criptografia end-to-end.<br>
+                <a href="#" style="color: #fff; font-weight: bold; text-decoration: none;">Precisa de ajuda?</a>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

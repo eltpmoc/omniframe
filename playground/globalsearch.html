@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground Global Search</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/globalsearch.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css"> <!-- Para a estrutura de cards falsa -->
+    <style>
+        body { padding: 2rem; max-width: 900px; margin: 0 auto; }
+        
+        .header-bar {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+        }
+
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--of-bg-surface);
+            border: 1px solid var(--of-border-color);
+            border-radius: var(--of-radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 { margin-top: 0; color: var(--of-text-main); }
+        .card p { color: var(--of-text-muted); margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <h1>Diretório de Projetos</h1>
+        
+        <div style="display: flex; gap: 1rem;">
+            <!-- O botão mockado estilo Vscode/Notion para quem usa mouse -->
+            <button class="of-globalsearch-trigger-btn" data-toggle="globalsearch">
+                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    Pesquisar...
+                </span>
+                <span class="of-globalsearch-kbd">Ctrl /</span>
+            </button>
+            <button class="of-btn of-btn-outline" id="toggleTheme">Tema</button>
+        </div>
+    </div>
+
+    <!-- Resultados Mocks (O componente filtrará estes via data-searchable) -->
+    <div class="cards-grid">
+        <div class="card" data-searchable>
+            <h3>Sistema de Login</h3>
+            <p>Implementar autenticação via OAuth2 com Google e Apple.</p>
+        </div>
+        <div class="card" data-searchable>
+            <h3>Banco de Dados (DB)</h3>
+            <p>Migração das tabelas de clientes para PostgreSQL (Prod).</p>
+        </div>
+        <div class="card" data-searchable>
+            <h3>Design UI Kit</h3>
+            <p>Atualizar as variáveis do OmniFrame para o Dark Mode perfeito.</p>
+        </div>
+        <div class="card" data-searchable>
+            <h3>Dashboard Financeiro</h3>
+            <p>Apresentar gráficos de receitas do trimestre.</p>
+        </div>
+        <div class="card" data-searchable>
+            <h3>Integração Stripe</h3>
+            <p>Adicionar hooks para métodos de pagamento na Europa.</p>
+        </div>
+        <div class="card" data-searchable>
+            <h3>Servidor Linux</h3>
+            <p>Escalar a infraestrutura da AWS usando Kubernetes.</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { GlobalSearch } from '../src/js/components/GlobalSearch.js';
+        
+        // Theme Toggle
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // Como Ctrl+K é do Chrome, vamos reconfigurar o playground para usar Ctrl+/
+        // A instância auto-criada no background será substituída por esta nova
+        window.OmniFrameGlobalSearchInstance = new GlobalSearch({
+            hotkey: '/',
+            onSearch: (query) => {
+                // Exemplo de como você bateria numa API aqui
+                console.log("Chamando API remota procurando por:", query);
+            }
+        });
+    </script>
+</body>
+</html>

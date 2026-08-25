@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground FAB</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css">
+    <link rel="stylesheet" href="../src/css/components/fab.css">
+    <style>
+        body { padding: 2rem; max-width: 800px; margin: 0 auto; height: 200vh; /* Para testar que é fixed */ }
+        .theme-switcher { margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+
+    <div class="theme-switcher">
+        <button class="of-btn of-btn-primary" id="toggleTheme">Alternar Tema</button>
+    </div>
+
+    <h1>Playground: Floating Action Button</h1>
+    <p class="of-text-muted">Desça a página (scroll) para ver o botão flutuante se manter fixo no canto inferior direito.</p>
+    <p>Clique no "+" para expandir as micro-animações do menu.</p>
+    
+    <div id="status" style="margin-top: 2rem; font-weight: bold;"></div>
+
+    <!-- O Componente FAB -->
+    <div class="of-fab-wrapper" data-toggle="fab">
+        
+        <!-- Menu Secundário (Expansível) -->
+        <ul class="of-fab-menu">
+            <!-- Os itens aparecem de baixo para cima graças a ordem reversa do CSS ou declaração -->
+            <li class="of-fab-item">
+                <span class="of-fab-label">Compartilhar</span>
+                <button class="of-fab-btn" aria-label="Compartilhar" data-action="share">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                </button>
+            </li>
+            
+            <li class="of-fab-item">
+                <span class="of-fab-label">Editar</span>
+                <button class="of-fab-btn" aria-label="Editar" data-action="edit">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+            </li>
+            
+            <li class="of-fab-item">
+                <span class="of-fab-label" style="color: var(--of-danger);">Excluir</span>
+                <button class="of-fab-btn" aria-label="Excluir" data-action="delete" style="color: var(--of-danger);">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Botão Principal (Gatilho) -->
+        <button class="of-fab-btn of-fab-trigger" aria-label="Abrir Menu de Ações" aria-expanded="false" aria-haspopup="true">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+        </button>
+
+    </div>
+
+    <script type="module">
+        import { FAB } from '../src/js/components/FAB.js';
+        
+        // Auto-init detectará o data-toggle="fab".
+        
+        // Theme Toggle
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // Ouvinte visual de eventos
+        document.addEventListener('click', (e) => {
+            const fabBtn = e.target.closest('.of-fab-menu .of-fab-btn');
+            if (fabBtn) {
+                const action = fabBtn.dataset.action;
+                const status = document.getElementById('status');
+                status.textContent = `Ação executada: ${action}`;
+                status.style.color = action === 'delete' ? 'var(--of-danger)' : 'var(--of-primary)';
+            }
+        });
+    </script>
+</body>
+</html>

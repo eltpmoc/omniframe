@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground Tabs</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css"> <!-- Herança UI Kit -->
+    <link rel="stylesheet" href="../src/css/components/tabs.css">
+    <style>
+        body { padding: 2rem; max-width: 800px; margin: 0 auto; }
+        .theme-float { position: fixed; bottom: 1rem; right: 1rem; z-index: 100; }
+        .dummy-content { padding: 1rem; background: var(--of-bg-surface-hover); border-radius: var(--of-radius-md); border: 1px dashed var(--of-border-color); }
+    </style>
+</head>
+<body>
+
+    <button class="of-btn of-btn-primary theme-float" id="toggleTheme">Alternar Tema</button>
+
+    <h1>Playground: Navegação por Abas (Tabs)</h1>
+    <p class="of-text-muted" style="margin-bottom: 2rem;">Teste clicar nas abas ou focar em uma delas e navegar usando as <kbd>setas esquerda/direita</kbd> do seu teclado.</p>
+
+    <!-- Componente de Abas -->
+    <div class="of-tabs-wrapper">
+        
+        <!-- O cabeçalho (tablist) -->
+        <div class="of-tabs-list" role="tablist">
+            <!-- Ao usar data-toggle="tab", o componente JS assumirá o controle -->
+            <button class="of-tab is-active" data-toggle="tab" data-target="#panel-perfil">Perfil do Usuário</button>
+            <button class="of-tab" data-toggle="tab" data-target="#panel-seguranca">Segurança</button>
+            <button class="of-tab" data-toggle="tab" data-target="#panel-pagamento">Métodos de Pagamento</button>
+        </div>
+
+        <!-- Os Painéis (Conteúdo) -->
+        <div class="of-tab-panel is-active" id="panel-perfil">
+            <h3 style="margin-top: 0;">Perfil do Usuário</h3>
+            <p>Gerencie as informações da sua conta corporativa.</p>
+            <div class="of-form-group" style="max-width: 300px;">
+                <label class="of-label">Nome de Exibição</label>
+                <input type="text" class="of-input" value="Elton Alves">
+            </div>
+            <button class="of-btn of-btn-primary">Salvar Alterações</button>
+        </div>
+
+        <div class="of-tab-panel" id="panel-seguranca">
+            <h3 style="margin-top: 0;">Configurações de Segurança</h3>
+            <p>A segurança dos seus dados é muito importante. Ative o 2FA para proteger sua conta.</p>
+            <div class="dummy-content">
+                <strong>Autenticação de Dois Fatores (Inativa)</strong><br>
+                <button class="of-btn of-btn-outline" style="margin-top: 1rem;">Configurar 2FA via App</button>
+            </div>
+        </div>
+
+        <div class="of-tab-panel" id="panel-pagamento">
+            <h3 style="margin-top: 0;">Faturas e Cartões</h3>
+            <p>Seus últimos cartões registrados não possuem faturas em aberto.</p>
+            <div class="dummy-content" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>💳 Mastercard terminando em <strong>8892</strong></span>
+                <span style="color: var(--of-success); font-weight: bold;">Ativo</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Inicialização -->
+    <script type="module">
+        import { Tabs } from '../src/js/components/Tabs.js';
+
+        // O auto-init no Tabs.js já fará o mapeamento inicial na carga do DOM, 
+        // Mas se criássemos dinamicamente via JS, faríamos: new Tabs('.of-tabs-list');
+
+        // Theme Toggle
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // Escutando eventos customizados
+        document.addEventListener('of:tab-changed', (e) => {
+            console.log('Aba ativada dinamicamente:', e.detail.tab.textContent);
+        });
+    </script>
+</body>
+</html>

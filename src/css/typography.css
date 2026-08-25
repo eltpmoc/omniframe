@@ -1,0 +1,56 @@
+/* ==========================================================================
+   OmniFrame - Advanced Typography & Links
+   ========================================================================== */
+
+/* Links Base */
+.of-link {
+  color: var(--of-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--of-transition-fast);
+}
+
+.of-link:hover {
+  color: var(--of-primary-hover, #4338ca); /* Fallback to a darker indigo */
+}
+
+/* Link Underline Animado */
+.of-link-underline {
+  position: relative;
+  color: var(--of-text-main);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.of-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--of-primary);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.of-link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Link Gradiente */
+.of-link-gradient {
+  background: linear-gradient(90deg, var(--of-primary), var(--of-info));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  font-weight: 700;
+  transition: opacity var(--of-transition-fast);
+}
+
+.of-link-gradient:hover {
+  opacity: 0.8;
+}

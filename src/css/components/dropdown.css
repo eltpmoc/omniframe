@@ -1,0 +1,90 @@
+/* ==========================================================================
+   OmniFrame - Dropdowns
+   ========================================================================== */
+
+.of-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.of-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.of-dropdown-toggle::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 4px solid currentColor;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  vertical-align: middle;
+  transition: transform var(--of-transition-fast);
+}
+
+.of-dropdown.is-open .of-dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+.of-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 12rem;
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-lg);
+  box-shadow: var(--of-shadow-lg);
+  padding: 0.5rem 0;
+  margin: 0;
+  list-style: none;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--of-transition-fast);
+}
+
+.of-dropdown.is-open .of-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Alinhamento à direita */
+.of-dropdown-menu-right {
+  left: auto;
+  right: 0;
+}
+
+.of-dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--of-text-main);
+  text-decoration: none;
+  transition: background-color var(--of-transition-fast);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.of-dropdown-item:hover,
+.of-dropdown-item:focus {
+  background-color: var(--of-bg-surface-hover);
+  outline: none;
+}
+
+.of-dropdown-item.is-active {
+  background-color: var(--of-primary);
+  color: var(--of-primary-content);
+}
+
+.of-dropdown-divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 1px solid var(--of-border-color);
+}

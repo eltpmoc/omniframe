@@ -1,0 +1,71 @@
+/* ==========================================================================
+   OmniFrame - Alerts (Alertas Inline)
+   ========================================================================== */
+
+.of-alert {
+  position: relative;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--of-radius-md);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: opacity var(--of-transition-normal), transform var(--of-transition-normal);
+}
+
+.of-alert.is-closing {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.of-alert-content {
+  flex: 1;
+}
+
+.of-alert-title {
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.of-alert-text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Dismissible (Botão Fechar) */
+.of-alert-dismissible {
+  padding-right: 3rem; /* Espaço para o botão */
+}
+
+/* Variações de Cor */
+.of-alert-primary {
+  color: var(--of-primary);
+  background-color: rgba(79, 70, 229, 0.1);
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+.of-alert-success {
+  color: #065f46;
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.of-alert-danger {
+  color: #991b1b;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.of-alert-warning {
+  color: #92400e;
+  background-color: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.of-alert-info {
+  color: #1e40af;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+}

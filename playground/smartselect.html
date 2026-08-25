@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - Playground Smart Select</title>
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="../src/css/variables.css">
+    <link rel="stylesheet" href="../src/css/components/forms.css"> <!-- Para estilos of-label base -->
+    <link rel="stylesheet" href="../src/css/components/smartselect.css">
+    <style>
+        body { padding: 2rem; max-width: 600px; margin: 0 auto; }
+        .theme-switcher { margin-bottom: 2rem; }
+        .theme-switcher button {
+            padding: 0.5rem 1rem;
+            background-color: var(--of-primary);
+            color: var(--of-primary-content);
+            border: none;
+            border-radius: var(--of-radius-sm);
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: var(--of-bg-surface-hover);
+            border-radius: var(--of-radius-md);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="theme-switcher">
+        <button id="toggleTheme">Alternar Tema (Light/Dark)</button>
+    </div>
+
+    <h1>Playground: Smart Select</h1>
+    <p>O componente intercepta o <code>&lt;select&gt;</code> padrão e constrói uma interface rica mantendo a compatibilidade dos eventos nativos.</p>
+
+    <div class="of-form-group">
+        <label class="of-label">Selecione o seu País</label>
+        
+        <!-- Select nativo que será substituído via script. Podemos adicionar data-smart-select para auto-init -->
+        <select id="countrySelect">
+            <option value="" disabled selected>Escolha um país...</option>
+            <option value="br">Brasil</option>
+            <option value="us">Estados Unidos</option>
+            <option value="ca">Canadá</option>
+            <option value="fr">França</option>
+            <option value="de">Alemanha</option>
+            <option value="jp">Japão</option>
+            <option value="au">Austrália</option>
+            <option value="ar">Argentina</option>
+            <option value="cl">Chile</option>
+            <option value="pt">Portugal</option>
+            <option value="es">Espanha</option>
+            <option value="it">Itália</option>
+            <option value="gb">Reino Unido</option>
+        </select>
+    </div>
+
+    <div id="output">O select nativo ainda não sofreu alterações.</div>
+
+    <script type="module">
+        import { SmartSelect } from '../src/js/components/SmartSelect.js';
+
+        // Theme Toggle
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const html = document.documentElement;
+            html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // Inicializar o Smart Select
+        const mySelect = new SmartSelect('#countrySelect', {
+            searchPlaceholder: 'Digite para buscar...'
+        });
+
+        // Ouvir eventos de 'change' disparados no Select nativo para provar a comunicação bi-direcional
+        document.getElementById('countrySelect').addEventListener('change', (e) => {
+            const output = document.getElementById('output');
+            output.innerHTML = `O componente SmartSelect mudou internamente o valor do &lt;select&gt; original.<br><br><b>Novo value nativo:</b> "${e.target.value}"`;
+        });
+    </script>
+</body>
+</html>

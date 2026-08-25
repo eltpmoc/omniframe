@@ -1,0 +1,77 @@
+/* ==========================================================================
+   OmniFrame - ListBox Component
+   ========================================================================== */
+
+.of-listbox {
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+
+.of-listbox-search {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--of-border-color);
+  background-color: var(--of-bg-body);
+}
+
+.of-listbox-search input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-md);
+  font-size: 0.9rem;
+  background-color: var(--of-bg-surface);
+  color: var(--of-text-main);
+  outline: none;
+  transition: all var(--of-transition-fast);
+}
+
+.of-listbox-search input:focus {
+  border-color: var(--of-primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+.of-listbox-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.of-listbox-option {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: var(--of-text-main);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--of-border-color);
+  transition: background-color var(--of-transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.of-listbox-option:last-child {
+  border-bottom: none;
+}
+
+.of-listbox-option:hover {
+  background-color: var(--of-bg-surface-hover);
+}
+
+.of-listbox-option.is-selected {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--of-primary);
+  font-weight: 600;
+}
+
+.of-listbox-empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--of-text-muted);
+  font-size: 0.9rem;
+}

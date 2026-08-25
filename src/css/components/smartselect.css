@@ -1,0 +1,153 @@
+/* ==========================================================================
+   OmniFrame - Smart Select
+   ========================================================================== */
+
+/* Container que esconde o select nativo e ancora o novo dropdown */
+.of-smart-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Ocultar o select nativo */
+.of-smart-select-wrapper select {
+  display: none !important;
+}
+
+/* O gatilho que parece um input normal */
+.of-smart-select-trigger {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: var(--of-font-family);
+  color: var(--of-text-main);
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-md);
+  transition: all var(--of-transition-fast);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  user-select: none;
+}
+
+.of-smart-select-trigger:focus,
+.of-smart-select-wrapper.is-open .of-smart-select-trigger {
+  border-color: var(--of-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
+}
+
+.of-smart-select-trigger::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--of-text-muted);
+  border-bottom: 2px solid var(--of-text-muted);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--of-transition-fast);
+}
+
+.of-smart-select-wrapper.is-open .of-smart-select-trigger::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+/* Caixa suspensa (Dropdown) */
+.of-smart-select-dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  width: 100%;
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  
+  /* Estados para animação */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--of-transition-fast);
+}
+
+.of-smart-select-wrapper.is-open .of-smart-select-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Barra de Busca interna */
+.of-smart-select-search {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--of-border-color);
+  background-color: var(--of-bg-body);
+  border-top-left-radius: var(--of-radius-md);
+  border-top-right-radius: var(--of-radius-md);
+}
+
+.of-smart-select-search input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-sm);
+  background-color: var(--of-bg-surface);
+  color: var(--of-text-main);
+  outline: none;
+  transition: border-color var(--of-transition-fast);
+}
+
+.of-smart-select-search input:focus {
+  border-color: var(--of-primary);
+}
+
+/* Lista de Opções */
+.of-smart-select-list {
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 0.25rem 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Estilização da barra de rolagem (opcional para WebKit) */
+.of-smart-select-list::-webkit-scrollbar {
+  width: 6px;
+}
+.of-smart-select-list::-webkit-scrollbar-thumb {
+  background-color: var(--of-border-color);
+  border-radius: 3px;
+}
+
+/* Item individual da lista */
+.of-smart-select-option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--of-text-main);
+  font-size: 0.875rem;
+  transition: background-color var(--of-transition-fast), color var(--of-transition-fast);
+}
+
+.of-smart-select-option:hover,
+.of-smart-select-option.is-focused {
+  background-color: var(--of-bg-surface-hover);
+}
+
+.of-smart-select-option.is-selected {
+  background-color: var(--of-primary);
+  color: var(--of-primary-content);
+  font-weight: 500;
+}
+
+/* Quando não encontra resultados */
+.of-smart-select-empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--of-text-muted);
+  font-size: 0.875rem;
+  display: none;
+}

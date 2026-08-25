@@ -1,0 +1,153 @@
+/* ==========================================================================
+   OmniFrame - Media (Audio, Video, Images)
+   ========================================================================== */
+
+/* Imagens Responsivas e Utilitários */
+.of-img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.of-img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.of-img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.of-img-rounded {
+  border-radius: var(--of-radius-lg);
+}
+
+.of-img-shadow {
+  box-shadow: var(--of-shadow-md);
+}
+
+/* 
+   ==========================================================================
+   OmniFrame Custom Media Player (Áudio & Vídeo)
+   ========================================================================== 
+*/
+
+/* O container que engloba a tag nativa e os controles customizados */
+.of-media-player {
+  position: relative;
+  background-color: var(--of-bg-surface);
+  border: 1px solid var(--of-border-color);
+  border-radius: var(--of-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--of-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Video Element */
+.of-media-player video {
+  width: 100%;
+  display: block;
+  background-color: #000;
+}
+
+/* Audio Element Hide nativo */
+.of-media-player audio {
+  display: none;
+}
+
+/* Barra de Controles Customizada */
+.of-media-controls {
+  padding: 0.75rem 1rem;
+  background-color: rgba(var(--of-bg-surface-rgb, 255, 255, 255), 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--of-border-color);
+}
+
+/* Transparente por cima do vídeo (opcional para vídeos) */
+.of-media-player.is-video .of-media-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: #fff;
+  opacity: 0;
+  transition: opacity var(--of-transition-normal);
+}
+.of-media-player.is-video:hover .of-media-controls {
+  opacity: 1;
+}
+
+/* Botão Play/Pause */
+.of-media-play-btn {
+  background: var(--of-primary);
+  color: var(--of-primary-content);
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--of-transition-fast), box-shadow var(--of-transition-fast);
+  box-shadow: var(--of-shadow-sm);
+}
+
+.of-media-play-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--of-shadow-md);
+}
+
+.of-media-play-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+
+/* Timeline / Barra de Progresso */
+.of-media-timeline {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.of-media-time {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--of-text-muted);
+}
+.of-media-player.is-video .of-media-time {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.of-media-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--of-border-color);
+  border-radius: var(--of-radius-full);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.of-media-player.is-video .of-media-progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.of-media-progress-fill {
+  height: 100%;
+  background: var(--of-primary);
+  width: 0%;
+  border-radius: var(--of-radius-full);
+  pointer-events: none;
+}

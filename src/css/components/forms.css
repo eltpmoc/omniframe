@@ -1,0 +1,279 @@
+/* ==========================================================================
+   OmniFrame - Form UI Kit (Premium Glass/Soft Edition)
+   ========================================================================== */
+
+.of-form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.of-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--of-text-main);
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+}
+
+/* Inputs, Textareas e Selects Base */
+.of-input,
+.of-textarea,
+.of-select {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  font-size: 1rem;
+  font-family: var(--of-font-family);
+  color: var(--of-text-main);
+  background-color: var(--of-bg-surface-hover); /* Fundo preenchido macio */
+  border: 1px solid transparent;
+  border-radius: var(--of-radius-lg);
+  transition: all var(--of-transition-normal);
+  outline: none;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02); /* Sombra interna sutil */
+}
+
+.of-input::placeholder,
+.of-textarea::placeholder {
+  color: var(--of-text-muted);
+}
+
+/* Foco: Branco puro flutuando com Glow */
+.of-input:focus,
+.of-textarea:focus,
+.of-select:focus {
+  background-color: var(--of-bg-surface);
+  border-color: var(--of-primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15), var(--of-shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Validações */
+.of-input.is-valid,
+.of-select.is-valid,
+.of-textarea.is-valid {
+  border-color: var(--of-success);
+  background-color: rgba(16, 185, 129, 0.05);
+}
+.of-input.is-valid:focus {
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+.of-input.is-invalid,
+.of-select.is-invalid,
+.of-textarea.is-invalid {
+  border-color: var(--of-danger);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+.of-input.is-invalid:focus {
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.of-feedback-invalid {
+  color: var(--of-danger);
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+/* Checkboxes & Radios Customizados */
+.of-check-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.of-check-group span {
+  font-size: 0.95rem;
+  color: var(--of-text-main);
+}
+
+.of-checkbox,
+.of-radio {
+  appearance: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1.5px solid var(--of-text-muted);
+  background-color: var(--of-bg-surface);
+  margin: 0;
+  display: grid;
+  place-content: center;
+  transition: all var(--of-transition-fast);
+  cursor: pointer;
+}
+
+.of-checkbox {
+  border-radius: var(--of-radius-sm);
+}
+.of-radio {
+  border-radius: 50%;
+}
+
+.of-checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 150ms transform cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 1em 1em var(--of-primary-content);
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.of-checkbox:checked {
+  background-color: var(--of-primary);
+  border-color: var(--of-primary);
+}
+.of-checkbox:checked::before { transform: scale(1); }
+
+.of-radio::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 150ms transform cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: var(--of-primary-content);
+}
+.of-radio:checked {
+  background-color: var(--of-primary);
+  border-color: var(--of-primary);
+}
+.of-radio:checked::before { transform: scale(1); }
+
+.of-checkbox:focus, .of-radio:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+  border-color: var(--of-primary);
+}
+
+/* ==========================================================================
+   Toggle Switches (Sim/Não)
+   ========================================================================== */
+.of-switch {
+  appearance: none;
+  width: 2.75rem;
+  height: 1.5rem;
+  background-color: var(--of-border-color);
+  border-radius: var(--of-radius-full);
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--of-transition-fast);
+}
+
+.of-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: var(--of-bg-surface);
+  border-radius: 50%;
+  box-shadow: var(--of-shadow-sm);
+  transition: transform var(--of-transition-fast);
+}
+
+.of-switch:checked {
+  background-color: var(--of-primary);
+}
+
+.of-switch:checked::after {
+  transform: translateX(1.25rem);
+}
+
+.of-switch:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+}
+
+/* ==========================================================================
+   Range Sliders
+   ========================================================================== */
+.of-range {
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--of-border-color);
+  border-radius: var(--of-radius-full);
+  outline: none;
+  transition: background var(--of-transition-fast);
+}
+
+.of-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--of-primary);
+  cursor: pointer;
+  box-shadow: var(--of-shadow-md);
+  transition: transform var(--of-transition-fast);
+}
+
+.of-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.of-range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
+}
+
+
+/* ==========================================================================
+   Botões Premium 
+   ========================================================================== */
+
+.of-btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--of-border-color);
+  color: var(--of-text-main);
+}
+.of-btn-outline:hover {
+  border-color: var(--of-primary);
+  color: var(--of-primary);
+  background-color: var(--of-bg-surface-hover);
+}
+
+.of-btn-ghost {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--of-text-muted);
+}
+.of-btn-ghost:hover {
+  background-color: var(--of-bg-surface-hover);
+  color: var(--of-text-main);
+}
+
+/* Botão Soft (Neumorphism leve) */
+.of-btn-soft {
+  background-color: rgba(79, 70, 229, 0.1); /* Primary RGB */
+  color: var(--of-primary);
+  border: 1px solid transparent;
+}
+.of-btn-soft:hover {
+  background-color: rgba(79, 70, 229, 0.2);
+}
+
+/* Botão 3D */
+.of-btn-3d {
+  background-color: var(--of-primary);
+  color: var(--of-primary-content);
+  border: none;
+  box-shadow: 0 4px 0px #312e81, 0 8px 10px rgba(0,0,0,0.2); /* Sombra dura + blur */
+  transform: translateY(-2px);
+}
+.of-btn-3d:active {
+  box-shadow: 0 0px 0px #312e81, 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateY(2px);
+}
+
+/* Tamanhos Ajustados para Pill Shape */
+.of-btn-sm { padding: 0.35rem 1rem; font-size: 0.8rem; }
+.of-btn-lg { padding: 0.875rem 2rem; font-size: 1.125rem; }
+
+.of-btn:disabled, .of-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}

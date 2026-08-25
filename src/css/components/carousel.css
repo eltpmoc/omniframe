@@ -1,0 +1,107 @@
+/* ==========================================================================
+   OmniFrame - Carousel
+   ========================================================================== */
+
+.of-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--of-radius-lg);
+  background-color: var(--of-bg-surface);
+  box-shadow: var(--of-shadow-md);
+}
+
+.of-carousel-inner {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+
+.of-carousel-item {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.of-carousel-item img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  /* Altura padrão, pode ser sobrescrita via utilitário de aspecto */
+  height: 400px; 
+}
+
+/* Navegação Anterior e Próximo */
+.of-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--of-transition-fast), transform var(--of-transition-fast);
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.of-carousel-control:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.of-carousel-prev {
+  left: 1rem;
+}
+
+.of-carousel-next {
+  right: 1rem;
+}
+
+.of-carousel-control svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Indicadores */
+.of-carousel-indicators {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.of-carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color var(--of-transition-fast), transform var(--of-transition-fast);
+  border: none;
+  padding: 0;
+}
+
+.of-carousel-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.of-carousel-indicator.is-active {
+  background-color: #fff;
+  transform: scale(1.2);
+}

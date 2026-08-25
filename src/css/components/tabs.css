@@ -1,0 +1,86 @@
+/* ==========================================================================
+   OmniFrame - Tabs Component (Segmented Controls Edition)
+   ========================================================================== */
+
+/* Wrapper Geral */
+.of-tabs-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Lista de Abas (Header Capsule) */
+.of-tabs-list {
+  display: inline-flex;
+  background-color: var(--of-bg-surface-hover); /* Fundo da pílula pai */
+  padding: 0.35rem;
+  border-radius: var(--of-radius-lg); /* Arredondamento da barra toda */
+  margin: 0 0 1.5rem 0;
+  list-style: none;
+  gap: 0.25rem; 
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02); /* Sutil profundidade interna */
+}
+
+.of-tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Botões Individuais (Abas) */
+.of-tab {
+  flex: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-family: var(--of-font-family);
+  font-weight: 600;
+  color: var(--of-text-muted);
+  cursor: pointer;
+  border-radius: var(--of-radius-md); /* Arredondamento da aba interna */
+  transition: all var(--of-transition-fast);
+  white-space: nowrap;
+  outline: none;
+}
+
+.of-tab:hover {
+  color: var(--of-text-main);
+}
+
+/* Foco de teclado */
+.of-tab:focus-visible {
+  box-shadow: 0 0 0 2px var(--of-primary);
+  background-color: var(--of-bg-surface);
+}
+
+/* Estado Ativo (O 'Cartão' branco flutuando por cima) */
+.of-tab.is-active {
+  color: var(--of-text-main);
+  background-color: var(--of-bg-surface);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Painel de Conteúdo (Content) */
+.of-tab-panel {
+  display: none;
+  padding: 0.5rem 0;
+  color: var(--of-text-main);
+  animation: tabFadeIn var(--of-transition-normal) forwards;
+}
+
+.of-tab-panel.is-active {
+  display: block;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
