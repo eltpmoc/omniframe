@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFrame - The Premium Frontend Framework</title>
+    
+    <!-- CSS Base -->
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/scrollbars.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/typography.css">
+    <link rel="stylesheet" href="src/css/utilities.css">
+    <link rel="stylesheet" href="src/css/components/forms.css">
+    <link rel="stylesheet" href="src/css/components/navbar.css">
+    
+    <style>
+        .hero {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.1), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(236, 72, 153, 0.05), transparent 40%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--of-text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-inline: auto;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="of-navbar">
+        <a href="#" class="of-navbar-brand" style="margin: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 0.5rem; display: inline-block; vertical-align: middle;">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            OmniFrame v1.2
+        </a>
+        <div class="of-navbar-collapse" style="justify-content: flex-end;">
+            <button id="toggleTheme" class="of-btn of-btn-ghost" style="border-radius: var(--of-radius-full);">🌙</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Zero Dependências.<br>
+                <span class="of-text-primary">100% Performance.</span>
+            </h1>
+            <p class="hero-subtitle">
+                O framework frontend premium construído em Vanilla JS. Acessível, modular, desenhado para sistemas corporativos e dashboards complexos.
+            </p>
+            <div class="hero-actions">
+                <a href="playground/index.html" class="of-btn of-btn-primary of-btn-lg of-btn-3d">
+                    Acessar o Playground
+                </a>
+                <a href="https://github.com/eltpmoc/omniframe" target="_blank" class="of-btn of-btn-secondary of-btn-lg">
+                    Ver no GitHub
+                </a>
+            </div>
+            
+            <div style="margin-top: 4rem; color: var(--of-text-muted); font-size: 0.9rem;">
+                <p>Para ler a documentação, navegue pela pasta <code>/docs</code> no repositório.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.getElementById('toggleTheme').innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

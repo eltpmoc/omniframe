@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages (CD)
+
+on:
+  # Roda sempre que der push na main (após os testes passarem idealmente)
+  push:
+    branches: ["main"]
+
+  # Permite rodar manualmente se precisar
+  workflow_dispatch:
+
+# Permissões necessárias para publicar no Github Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite apenas um deploy simultâneo
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Faz o upload da raiz do projeto inteiro (Docs, Playground, Src)
+          path: '.'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
