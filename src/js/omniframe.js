@@ -3,6 +3,8 @@
    Importa e inicializa todos os componentes do framework.
    ========================================================================== */
 
+import { Config } from './core/Config.js';
+
 import { Alert } from './components/Alert.js';
 import { Carousel } from './components/Carousel.js';
 import { DataTable } from './components/DataTable.js';
@@ -23,6 +25,7 @@ import { Calendar } from './components/Calendar.js';
 
 // Exportando para caso o dev queira instanciar via JS manualmente
 export {
+    Config,
     Alert,
     Carousel,
     DataTable,

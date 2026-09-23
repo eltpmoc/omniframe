@@ -122,7 +122,41 @@
             </div>
         </nav>
 
-        <div style="padding: 2rem 0; display: flex; flex-direction: column; gap: 2rem;">
+        <!-- Theme Customizer (Playground Control Center) -->
+        <div class="theme-customizer demo-card" style="margin: 2rem 2rem 0 2rem; padding: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-end; border-color: var(--of-primary); box-shadow: var(--of-shadow-lg);">
+            <h3 style="width: 100%; text-align: center; margin-top: 0; margin-bottom: 0.5rem; color: var(--of-primary);">Configurador Global de Tema</h3>
+            <p style="width: 100%; text-align: center; margin-top: 0; margin-bottom: 1rem; font-size: 0.9rem; color: var(--of-text-muted);">As mudanças feitas aqui são persistidas e afetam <b>todo o playground</b> automaticamente.</p>
+            
+            <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                <label class="of-label" style="font-size: 0.75rem;">Primária</label>
+                <input type="color" id="colorPrimary" class="of-input" value="#4f46e5" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+            </div>
+            <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                <label class="of-label" style="font-size: 0.75rem;">Secundária</label>
+                <input type="color" id="colorSecondary" class="of-input" value="#8b5cf6" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+            </div>
+            <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                <label class="of-label" style="font-size: 0.75rem;">Bordas</label>
+                <input type="color" id="colorBorder" class="of-input" value="#e2e8f0" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+            </div>
+            <div class="of-form-group" style="margin-bottom: 0; text-align: left; width: 5rem;">
+                <label class="of-label" style="font-size: 0.75rem;">Tam. (px)</label>
+                <input type="number" id="inputFontSize" class="of-input" value="16" style="height: 2.5rem; padding: 0.25rem 0.5rem; text-align: center;">
+            </div>
+            <div class="of-form-group" style="margin-bottom: 0; text-align: left; width: 10rem;">
+                <label class="of-label" style="font-size: 0.75rem;">Tipografia</label>
+                <select id="selectFont" class="of-select" style="height: 2.5rem; padding: 0.25rem 0.5rem; font-size: 0.85rem;">
+                    <option value="'Inter', system-ui, sans-serif">Inter (Padrão)</option>
+                    <option value="'Roboto', sans-serif">Roboto</option>
+                    <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                    <option value="monospace">Monospace</option>
+                </select>
+            </div>
+            <button id="btnApplyTheme" class="of-btn of-btn-primary of-btn-3d" style="height: 2.5rem; padding: 0 1rem; font-size: 0.85rem;">Aplicar Tema</button>
+            <button id="btnResetTheme" class="of-btn of-btn-ghost" style="height: 2.5rem; padding: 0 1rem; font-size: 0.85rem;">Restaurar</button>
+        </div>
+
+        <div style="padding: 2rem; display: flex; flex-direction: column; gap: 2rem;">
             
             <!-- COMPONENTE: ALERTS & LISTGROUPS (v1.2) -->
             <div class="demo-card" data-searchable data-search-term="alertas feedback listas listgroup dismiss">
@@ -440,6 +474,52 @@
             html.setAttribute('data-theme', html.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
         });
 
+        // ============================================
+        // Lógica do Configurador Global de Tema
+        // ============================================
+        // Config.js já é importado no fim do body para toda página, mas aqui no playground
+        // principal precisamos de acesso ao objeto Config para manipular os inputs.
+        import { Config } from '../src/js/core/Config.js';
+        
+        // Sincronizar inputs se já existir um tema customizado no localStorage
+        const saved = localStorage.getItem('omniframe_theme');
+        if (saved) {
+            try {
+                const opt = JSON.parse(saved);
+                if (opt.primaryColor) document.getElementById('colorPrimary').value = opt.primaryColor;
+                if (opt.secondaryColor) document.getElementById('colorSecondary').value = opt.secondaryColor;
+                if (opt.borderColor) document.getElementById('colorBorder').value = opt.borderColor;
+                if (opt.fontSize) document.getElementById('inputFontSize').value = parseInt(opt.fontSize);
+                if (opt.fontFamily) document.getElementById('selectFont').value = opt.fontFamily;
+            } catch (e) {}
+        }
+
+        const applyCurrentTheme = () => {
+            Config.setTheme({
+                primaryColor: document.getElementById('colorPrimary').value,
+                secondaryColor: document.getElementById('colorSecondary').value,
+                borderColor: document.getElementById('colorBorder').value,
+                fontSize: document.getElementById('inputFontSize').value + 'px',
+                fontFamily: document.getElementById('selectFont').value
+            });
+        };
+
+        ['colorPrimary', 'colorSecondary', 'colorBorder', 'inputFontSize', 'selectFont'].forEach(id => {
+            document.getElementById(id).addEventListener('change', applyCurrentTheme);
+        });
+
+        document.getElementById('btnApplyTheme').addEventListener('click', applyCurrentTheme);
+
+        document.getElementById('btnResetTheme').addEventListener('click', () => {
+            Config.resetTheme();
+            document.getElementById('colorPrimary').value = '#4f46e5';
+            document.getElementById('colorSecondary').value = '#8b5cf6';
+            document.getElementById('colorBorder').value = '#e2e8f0';
+            document.getElementById('inputFontSize').value = '16';
+            document.getElementById('selectFont').value = "'Inter', system-ui, sans-serif";
+        });
+        // ============================================
+
         // 2. Global Search
         window.OmniFrameGlobalSearchInstance = new GlobalSearch({ hotkey: '/' });
 
@@ -461,6 +541,10 @@
             if (confirmed) alert("Ação Executada: Você deletou tudo!");
         });
 
+    </script>
+
+    <script type="module">
+        import { Config } from "../src/js/core/Config.js";
     </script>
 </body>
 </html>

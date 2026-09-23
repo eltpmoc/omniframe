@@ -95,6 +95,36 @@
                 </a>
             </div>
             
+            <div class="theme-customizer" style="margin-top: 3rem; background: var(--of-bg-surface); padding: 1.5rem; border-radius: var(--of-radius-lg); box-shadow: var(--of-shadow-md); display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-end; border: 1px solid var(--of-border-color);">
+                <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                    <label class="of-label" style="font-size: 0.75rem;">Cor Primária</label>
+                    <input type="color" id="colorPrimary" class="of-input" value="#4f46e5" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+                </div>
+                <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                    <label class="of-label" style="font-size: 0.75rem;">Secundária</label>
+                    <input type="color" id="colorSecondary" class="of-input" value="#8b5cf6" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+                </div>
+                <div class="of-form-group" style="margin-bottom: 0; text-align: left;">
+                    <label class="of-label" style="font-size: 0.75rem;">Bordas</label>
+                    <input type="color" id="colorBorder" class="of-input" value="#e2e8f0" style="padding: 0; width: 3rem; height: 2.5rem; border: none; cursor: pointer;">
+                </div>
+                <div class="of-form-group" style="margin-bottom: 0; text-align: left; width: 5rem;">
+                    <label class="of-label" style="font-size: 0.75rem;">Tamanho</label>
+                    <input type="number" id="inputFontSize" class="of-input" value="16" style="height: 2.5rem; padding: 0.25rem 0.5rem; text-align: center;">
+                </div>
+                <div class="of-form-group" style="margin-bottom: 0; text-align: left; width: 10rem;">
+                    <label class="of-label" style="font-size: 0.75rem;">Fonte</label>
+                    <select id="selectFont" class="of-select" style="height: 2.5rem; padding: 0.25rem 0.5rem; font-size: 0.85rem;">
+                        <option value="'Inter', system-ui, sans-serif">Inter (Padrão)</option>
+                        <option value="'Roboto', sans-serif">Roboto</option>
+                        <option value="'Comic Sans MS', cursive">Comic Sans</option>
+                        <option value="monospace">Monospace</option>
+                    </select>
+                </div>
+                <button id="btnApplyTheme" class="of-btn of-btn-primary of-btn-3d" style="height: 2.5rem; padding: 0 1rem; font-size: 0.85rem;">Aplicar Tema</button>
+                <button id="btnResetTheme" class="of-btn of-btn-ghost" style="height: 2.5rem; padding: 0 1rem; font-size: 0.85rem;">Restaurar</button>
+            </div>
+            
             <div style="margin-top: 4rem; color: var(--of-text-muted); font-size: 0.9rem;">
                 <p>Para ler a documentação, navegue pela pasta <code>/docs</code> no repositório.</p>
             </div>
@@ -107,6 +137,41 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             document.getElementById('toggleTheme').innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
+    <script type="module">
+        import { Config } from './src/js/omniframe.js';
+
+        // Atualiza as cores em tempo real enquanto arrasta o color picker
+        const inputs = ['colorPrimary', 'colorSecondary', 'colorBorder', 'inputFontSize', 'selectFont'];
+        
+        document.getElementById('btnApplyTheme').addEventListener('click', () => {
+            applyCurrentTheme();
+        });
+
+        function applyCurrentTheme() {
+            Config.setTheme({
+                primaryColor: document.getElementById('colorPrimary').value,
+                secondaryColor: document.getElementById('colorSecondary').value,
+                borderColor: document.getElementById('colorBorder').value,
+                fontSize: document.getElementById('inputFontSize').value + 'px',
+                fontFamily: document.getElementById('selectFont').value
+            });
+        }
+
+        // Permitir atualização em tempo real se o usuário quiser (opcional)
+        inputs.forEach(id => {
+            document.getElementById(id).addEventListener('change', applyCurrentTheme);
+        });
+
+        document.getElementById('btnResetTheme').addEventListener('click', () => {
+            Config.resetTheme();
+            // Resetar inputs para valores originais
+            document.getElementById('colorPrimary').value = '#4f46e5';
+            document.getElementById('colorSecondary').value = '#8b5cf6';
+            document.getElementById('colorBorder').value = '#e2e8f0';
+            document.getElementById('inputFontSize').value = '16';
+            document.getElementById('selectFont').value = "'Inter', system-ui, sans-serif";
         });
     </script>
 </body>
